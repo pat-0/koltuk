@@ -1,0 +1,249 @@
+<title>Biletra Etkinlik Sayfası</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#EDEFEB; --surface:#FFFFFF; --surface-2:#F5F6F3; --surface-3:#E4E7E2;
+  --text:#13171A; --muted:#58616A; --line:#D7DBD4; --line-strong:#B6BDB4;
+  --shadow:0 1px 2px rgba(19,23,26,.06),0 8px 28px rgba(19,23,26,.08);
+  --brand:#0B6E4F; --brand-ink:#FFFFFF; --accent:#C6F432; --accent-ink:#13171A;
+  --ok:#1C7A4B; --warn:#9A5B00; --warn-bg:#FFF1D6; --hero:#0E2A22; --hero-ink:#F2F5F0; --hero-muted:#A9BDB4;
+  --cat1:#E0502A; --cat2:#E39B12; --cat3:#22968A; --cat4:#4A77D4; --cat5:#7A8496; --cat-vip:#8B4FC8;
+  --font-display:'Bricolage Grotesque','IBM Plex Sans',system-ui,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:14px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1012; --surface:#15191C; --surface-2:#1B2023; --surface-3:#242A2E;
+    --text:#E6E9E5; --muted:#99A2A9; --line:#2A3136; --line-strong:#3B444B;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --warn:#F2B04A; --warn-bg:rgba(242,176,74,.14); --hero:#0F1E19; --hero-muted:#93A79E;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1012; --surface:#15191C; --surface-2:#1B2023; --surface-3:#242A2E;
+  --text:#E6E9E5; --muted:#99A2A9; --line:#2A3136; --line-strong:#3B444B;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  --warn:#F2B04A; --warn-bg:rgba(242,176,74,.14); --hero:#0F1E19; --hero-muted:#93A79E;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+h1,h2,h3{font-family:var(--font-display);font-weight:650;letter-spacing:-.01em;margin:0}
+[hidden]{display:none !important}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Site üst çubuğu */
+.site{background:var(--surface);border-bottom:1px solid var(--line)}
+.site .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.logo{display:inline-flex;align-items:center;height:34px;padding:0 12px;border-radius:8px;background:var(--brand);color:var(--brand-ink);font-family:var(--font-display);font-weight:750;font-size:15px;letter-spacing:.06em;white-space:nowrap}
+.logo i{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin-right:8px}
+.nav{display:flex;gap:4px;flex:1;min-width:0}
+.nav a{color:var(--muted);text-decoration:none;font-size:13.5px;padding:6px 10px;border-radius:8px;white-space:nowrap}
+.nav a[aria-current="page"]{color:var(--text);background:var(--surface-3);font-weight:500}
+.cart-btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:13px;white-space:nowrap}
+.cart-btn svg{width:16px;height:16px}
+.count{min-width:20px;height:20px;border-radius:999px;background:var(--brand);color:var(--brand-ink);font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;padding:0 6px;font-variant-numeric:tabular-nums}
+.count.bump{animation:bump .4s ease}
+@keyframes bump{40%{transform:scale(1.3)}}
+
+/* Etkinlik başlığı */
+.hero{background:var(--hero);color:var(--hero-ink)}
+.hero .wrap{padding-top:22px;padding-bottom:18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end}
+.crumbs{font-size:12px;color:var(--hero-muted);margin-bottom:8px}
+.hero h1{font-size:30px;line-height:1.1}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;color:var(--hero-muted);font-size:13.5px}
+.meta b{color:var(--hero-ink);font-weight:500}
+.from{text-align:right;font-size:12.5px;color:var(--hero-muted)}
+.from b{display:block;font-family:var(--font-display);font-size:24px;color:var(--accent);font-weight:650}
+.tabs{display:flex;gap:6px;margin-top:16px;overflow-x:auto;scrollbar-width:none;grid-column:1/-1}
+.tabs button{flex:none;border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--hero-ink);border-radius:999px;padding:6px 12px;font-size:12.5px;white-space:nowrap}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+
+/* Adımlar */
+.steps{display:flex;gap:8px;margin:16px 0 12px;font-size:13px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.step i{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:600;border:1px solid var(--line-strong)}
+.step.done i{background:var(--ok);border-color:var(--ok);color:#fff}
+.step.on{color:var(--text);font-weight:600}
+.step.on i{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.step + .step::before{content:"";width:24px;height:1px;background:var(--line-strong);margin-right:2px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start;padding-bottom:32px}
+.viewer{height:680px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.note b{color:var(--text);font-weight:600}
+
+/* Sepet */
+.cart{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;position:sticky;top:12px;display:flex;flex-direction:column;gap:12px}
+.cart-head{display:flex;align-items:baseline;justify-content:space-between}
+.cart h2{font-size:16px}
+.cart .sub{color:var(--muted);font-size:12.5px}
+.items{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.item{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line)}
+.item.new{animation:flash 1.2s ease}
+@keyframes flash{0%{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 25%,transparent)}}
+.item .c{align-self:stretch;border-radius:2px}
+.item b{display:block;font-weight:600;font-size:13.5px}
+.item small{display:block;color:var(--muted);font-size:12px}
+.item .p{font-family:var(--font-mono);font-size:12.5px;text-align:right}
+.rm{border:0;background:transparent;color:var(--muted);font-size:12px;padding:2px 0;text-decoration:underline}
+.warn{display:inline-flex;align-items:center;gap:4px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:0 6px;font-size:11.5px;font-weight:600;margin-top:3px}
+.empty{color:var(--muted);font-size:13px;padding:14px;text-align:center;border:1px dashed var(--line-strong);border-radius:10px}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:10px}
+.total b{font-family:var(--font-display);font-size:22px;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:42px;border-radius:10px;border:1px solid var(--brand);background:var(--brand);color:var(--brand-ink);font-weight:600;width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.msg{font-size:12.5px;color:var(--muted);min-height:1em}
+details.log{font-size:12px;color:var(--muted)}
+details.log summary{cursor:pointer}
+details.log ol{font-family:var(--font-mono);font-size:11px;margin:8px 0 0;padding:8px 10px 8px 26px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;max-height:180px;overflow:auto;word-break:break-all}
+
+/* Telefon: alt sepet çubuğu */
+.mbar{display:none}
+@media (max-width: 860px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .cart{position:static}
+  .viewer{height:760px}
+  .nav{display:none}
+  .site .wrap{justify-content:space-between}
+  .hero .wrap{grid-template-columns:minmax(0,1fr)}
+  .hero h1{font-size:23px}
+  .from{text-align:left}
+  .from b{display:inline;font-size:18px;margin-left:6px}
+  .mbar{display:flex;position:sticky;bottom:0;z-index:5;align-items:center;gap:12px;background:var(--surface);border-top:1px solid var(--line);box-shadow:var(--shadow);
+    padding:10px max(16px,env(safe-area-inset-right,0px)) max(10px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  .mbar div{flex:1;min-width:0;font-size:12.5px;color:var(--muted)}
+  .mbar b{display:block;color:var(--text);font-size:15px;font-variant-numeric:tabular-nums}
+  .mbar .btn{width:auto;padding:0 16px;height:38px}
+  .step + .step::before{width:10px}
+}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important} }
+</style>
+
+<header class="site">
+  <div class="wrap">
+    <span class="logo"><i></i>BİLETRA</span>
+    <nav class="nav" aria-label="Site"><a href="#" aria-current="page">Etkinlikler</a><a href="#">Spor</a><a href="#">Tiyatro</a><a href="#">Mekânlar</a></nav>
+    <button class="cart-btn" id="cartBtn" aria-label="Sepet">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1.5 2h2l1.6 8.2h7.6L14.5 5H4.3"/><circle cx="6" cy="13" r="1"/><circle cx="12" cy="13" r="1"/></svg>
+      Sepet <span class="count" id="count">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="crumbs" id="crumbs">Etkinlikler › Spor</div>
+      <h1 id="evTitle">Kartallar – Yıldızlar</h1>
+      <div class="meta" id="evMeta"></div>
+    </div>
+    <div class="from">Biletler <b id="evFrom">₺650</b>'den başlayan fiyatlarla</div>
+    <div class="tabs" id="tabs" role="group" aria-label="Etkinlik"></div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="steps" aria-label="Satın alma adımları">
+    <span class="step done"><i>✓</i>Etkinlik</span>
+    <span class="step on" aria-current="step"><i>2</i>Koltuk seç</span>
+    <span class="step"><i>3</i>Ödeme</span>
+  </div>
+  <div class="layout">
+    <div>
+      <div class="viewer" id="viewer"></div>
+      <p class="note">Bir blok seçin, koltuğun görünümünü açın ve <b>Bu koltuğu seç</b> ile sepetinize ekleyin. Koltuk görünümü iframe içinde çalışır; seçim sepete <code>postMessage</code> ile düşer.</p>
+    </div>
+    <aside class="cart" id="cart" aria-labelledby="cartTitle">
+      <div class="cart-head"><h2 id="cartTitle">Sepetiniz</h2><span class="sub" id="cartSub">0 bilet</span></div>
+      <ul class="items" id="items" aria-live="polite"></ul>
+      <div class="total"><span class="sub">Toplam</span><b id="total">₺0</b></div>
+      <button class="btn" id="pay" disabled>Ödemeye geç</button>
+      <div class="msg" id="msg" role="status"></div>
+      <details class="log"><summary>Entegrasyon günlüğü (postMessage)</summary><ol id="log" reversed></ol></details>
+    </aside>
+  </div>
+</main>
+<div class="mbar" id="mbar"><div><span id="mCount">Sepet boş</span><b id="mTotal">₺0</b></div><button class="btn" id="mGo">Sepete git</button></div>
+
+<script src="embed.js"></script>
+<script>
+(function(){
+'use strict';
+/* Kurgusal bilet sitesi. Etkinlik → görüntüleyicideki örnek mekân kimliği. */
+const EVENTS=[
+  { id:'basket', venue:'arena3d', crumbs:'Etkinlikler › Spor › Basketbol', title:'Kartallar – Yıldızlar', when:'14 Kasım 2026 Cumartesi, 20:30', where:'Örnek Arena', kind:'Basketbol', tab:'Basketbol · 14 Kas' },
+  { id:'genc',   venue:'salon',   crumbs:'Etkinlikler › Spor › Basketbol', title:'Kartallar – Yıldızlar · Gençler', when:'15 Kasım 2026 Pazar, 17:00', where:'Şablon Spor Salonu', kind:'Basketbol', tab:'Gençler · 15 Kas' },
+  { id:'oyun',   venue:'tiyatro', crumbs:'Etkinlikler › Tiyatro',          title:'Bir Yaz Gecesi Rüyası', when:'21 Kasım 2026 Cumartesi, 20:30', where:'Şablon Tiyatro Salonu', kind:'Tiyatro', tab:'Tiyatro · 21 Kas' }
+];
+const PRICE_FROM={ arena3d:1150, salon:1150, tiyatro:1150 };
+const MAX_TICKETS=6;
+const $=id=>document.getElementById(id);
+const fmt=n=>'₺'+n.toLocaleString('tr-TR');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CATVAR={ CAT1:'--cat1', CAT2:'--cat2', CAT3:'--cat3', CAT4:'--cat4', CAT5:'--cat5', VIP:'--cat-vip' };
+let ev=EVENTS[0], cart=[], lastAdded=null;
+
+function log(dir, m){
+  const li=document.createElement('li');
+  const body=Object.assign({},m); delete body.channel;
+  li.textContent=dir+' '+JSON.stringify(body).slice(0,180);
+  const ol=$('log'); ol.insertBefore(li, ol.firstChild); while(ol.children.length>14) ol.removeChild(ol.lastChild);
+}
+
+const viewer=KoltukViewer.mount($('viewer'),{
+  venue:ev.venue, brand:'biletra', lang:'tr', title:'Koltuktan görünüm: '+ev.where,
+  onMessage:m=>{ if(m.type!=='koltuk:event') log('←',m); else log('←',{type:m.type, name:m.event.name}); },
+  onSeatSelect:addToCart,
+  onReady:()=>{ syncTheme(); }
+});
+window.__viewer=viewer;  // test/konsol erişimi
+
+function addToCart(seat){
+  if(!seat || !seat.ticketCode) return;
+  if(cart.some(x=>x.ticketCode===seat.ticketCode && x.eventId===ev.id)){ say('Bu koltuk zaten sepetinizde.'); return; }
+  if(cart.length>=MAX_TICKETS){ say('Bir siparişte en fazla '+MAX_TICKETS+' bilet alabilirsiniz.'); return; }
+  cart.push(Object.assign({ eventId:ev.id, eventTitle:ev.title }, seat)); lastAdded=seat.ticketCode+'|'+ev.id;
+  renderCart(); say(seat.sectionName+' · Sıra '+seat.row+' · Koltuk '+seat.seat+' sepete eklendi.');
+  const c=$('count'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
+}
+function say(t){ $('msg').textContent=t; }
+function renderCart(){
+  const n=cart.length, total=cart.reduce((a,x)=>a+(+x.price||0),0);
+  $('count').textContent=n; $('cartSub').textContent=n+' bilet'; $('total').textContent=fmt(total);
+  $('mCount').textContent=n? n+' bilet' : 'Sepet boş'; $('mTotal').textContent=fmt(total);
+  $('pay').disabled=!n;
+  $('items').innerHTML=n? cart.map((x,i)=>`<li class="item${x.ticketCode+'|'+x.eventId===lastAdded?' new':''}" data-code="${esc(x.ticketCode)}">
+      <span class="c" style="background:var(${CATVAR[x.priceCategory]||'--cat5'})"></span>
+      <div style="min-width:0"><b>${esc(x.sectionName)} · Sıra ${esc(x.row)} · Koltuk ${esc(x.seat)}</b>
+        <small>${esc(x.eventTitle)} · ${esc(x.categoryName)}</small>
+        ${x.obstructed?`<span class="warn">Kısıtlı görüş</span>`:''}</div>
+      <div><div class="p">${fmt(+x.price||0)}</div><button class="rm" data-i="${i}" aria-label="${esc(x.ticketCode)} biletini kaldır">Kaldır</button></div></li>`).join('')
+    : `<li class="empty">Henüz koltuk seçmediniz.</li>`;
+  $('items').querySelectorAll('.rm').forEach(b=>b.onclick=()=>{ cart.splice(+b.dataset.i,1); lastAdded=null; renderCart(); say('Bilet sepetten çıkarıldı.'); });
+}
+function renderEvent(){
+  $('crumbs').textContent=ev.crumbs; $('evTitle').textContent=ev.title;
+  $('evMeta').innerHTML=`<span><b>${esc(ev.when)}</b></span><span>${esc(ev.where)}</span><span>${esc(ev.kind)}</span>`;
+  $('evFrom').textContent=fmt(PRICE_FROM[ev.venue]||650);
+  $('tabs').innerHTML=EVENTS.map(e=>`<button data-ev="${e.id}" aria-pressed="${e.id===ev.id}">${esc(e.tab)}</button>`).join('');
+  $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{ const e=EVENTS.find(x=>x.id===b.dataset.ev); if(!e||e===ev) return; ev=e; renderEvent(); viewer.selectVenue(e.venue); log('→',{type:'koltuk:selectVenue', venueId:e.venue}); });
+}
+/* Artifact barındırıcısı kök öğeye data-theme koyarsa görüntüleyiciye de iletilir. */
+function syncTheme(){ const th=document.documentElement.getAttribute('data-theme'); viewer.setTheme(th==='light'||th==='dark'?th:'auto'); }
+new MutationObserver(syncTheme).observe(document.documentElement,{attributes:true, attributeFilter:['data-theme']});
+
+$('pay').onclick=()=>say('Demo: ödeme adımı bu örnekte yer almıyor. Gerçek entegrasyonda koltuklar bilet sisteminizde rezerve edilir.');
+$('cartBtn').onclick=$('mGo').onclick=()=>$('cart').scrollIntoView({behavior:'smooth', block:'start'});
+renderEvent(); renderCart();
+})();
+</script>
