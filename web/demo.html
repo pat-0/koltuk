@@ -136,6 +136,9 @@ h1,h2,h3{font-family:var(--font-display);font-weight:650;letter-spacing:-.01em;m
 .chip strong{font-family:var(--font-display);font-weight:650;font-size:13.5px;white-space:nowrap}
 .chip span{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tr{top:12px;right:12px;display:flex;gap:6px}
+.crowd{top:56px;left:12px;background:var(--overlay);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);align-items:center}
+.crowd .cl{font-size:11.5px;color:var(--muted);padding:0 6px 0 7px}
+.crowd button{padding:5px 9px;font-size:12px}
 .tr .btn{background:var(--overlay);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hint{left:50%;transform:translateX(-50%);bottom:118px;background:var(--scrim);color:#fff;font-size:12.5px;padding:6px 12px;border-radius:999px;white-space:nowrap;pointer-events:none;transition:opacity .4s}
 .seatbar{left:12px;right:12px;bottom:12px;background:var(--overlay);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:10px 12px;
@@ -250,6 +253,8 @@ html.embed .app{grid-template-rows:minmax(0,1fr)}
   .hint{bottom:118px}
   .chip{left:8px;top:8px;max-width:calc(100% - 132px)}
   .tr{right:8px;top:8px}
+  .crowd{left:8px;top:50px}
+  .crowd .cl{display:none}
   .pop{top:54px}
   /* Gömülüyken telefonda tek kaydırma: içerik doğal yüksekliğinde akar, host iframe'i koltuk:resize ile büyütür. */
   html.embed, html.embed body{height:auto}
@@ -309,6 +314,7 @@ html.embed .app{grid-template-rows:minmax(0,1fr)}
     <section class="stage" id="stage" aria-label="3D arena görünümü">
       <canvas id="gl" tabindex="0" aria-label="3D görünüm. Sürükleyerek döndürün."></canvas>
       <div class="ov chip" id="modeChip"><strong id="modeTitle">Genel bakış</strong><span id="modeSub"></span></div>
+      <div class="ov crowd seg" id="crowdSeg" role="group" aria-label="Seyirci"></div>
       <div class="ov tr"><button class="btn" id="btnOverview" hidden>
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="12" height="8" rx="4"/><rect x="5.5" y="6.5" width="5" height="3" rx="1"/></svg>
         <span data-i18n="overview">Genel bakış</span></button>
@@ -372,6 +378,7 @@ const I18N = {
     samplePrice:'Örnek fiyat', category:'Kategori', availability:'Müsaitlik', seatsAvail:'{a} / {t} koltuk',
     rowsCount:'{n} sıra', capacity:'{n} koltuk', tier_lower:'Alt Kat', tier_upper:'Üst Kat', tier_middle:'Orta Kat', tier_vip:'VIP', tier_floor:'Parke',
     modeOverviewSub:'Döndürmek için sürükleyin, yakınlaştırmak için kaydırın', modeSeat:'Koltuk görünümü',
+    crowdLbl:'Seyirci', crowdEmpty:'Boş', crowdSeated:'Oturan', crowdStanding:'Ayakta', crowdNote:'temsili kalabalık', crowdStandNote:'ayakta, göz 1,60 m',
     dragHint:'Sürükleyerek etrafa bakın · kaydırarak yakınlaştırın', distance:'Sahaya', elevation:'Açı', pickSeatPrompt:'Bir koltuk seçin ya da görünümü açın',
     prevSeat:'Önceki koltuk', nextSeat:'Sonraki koltuk', rowFront:'Öndeki sıra', rowBack:'Arkadaki sıra',
     toastCta:'Demo: {seat} seçildi. Gerçek entegrasyonda sepete eklenir.', toastCopied:'Olaylar panoya kopyalandı.', toastCopyFail:'Kopyalanamadı; olaylar konsola yazıldı.',
@@ -400,6 +407,7 @@ const I18N = {
     samplePrice:'Sample price', category:'Category', availability:'Availability', seatsAvail:'{a} / {t} seats',
     rowsCount:'{n} rows', capacity:'{n} seats', tier_lower:'Lower Tier', tier_upper:'Upper Tier', tier_middle:'Middle Tier', tier_vip:'VIP', tier_floor:'Floor',
     modeOverviewSub:'Drag to rotate, scroll to zoom', modeSeat:'Seat view',
+    crowdLbl:'Crowd', crowdEmpty:'Empty', crowdSeated:'Seated', crowdStanding:'Standing', crowdNote:'simulated crowd', crowdStandNote:'standing, eye 1.60 m',
     dragHint:'Drag to look around · scroll to zoom', distance:'To court', elevation:'Angle', pickSeatPrompt:'Pick a seat or open the view',
     prevSeat:'Previous seat', nextSeat:'Next seat', rowFront:'Row in front', rowBack:'Row behind',
     toastCta:'Demo: {seat} selected. In production it goes to the basket.', toastCopied:'Events copied to clipboard.', toastCopyFail:'Copy failed; events logged to console.',
@@ -1000,10 +1008,79 @@ const SCENE_ADAPTERS = { procedural:ProceduralScene, splat:SplatScene, mesh:null
 /* =====================================================================
    5) DURUM + ANALİTİK
    ===================================================================== */
+/* Temsili kalabalık: her koltuğa yüzsüz bir figür (oturan / ayakta). Kişi verisi yok; boylar rastgele 1,55–1,90 m.
+   Seçili koltuk boş bırakılır; "Ayakta" modunda bakış yüksekliği 1,15 → 1,60 m. */
+const CROWD = {
+  STAND_DY:0.45,
+  eyeOffset(){ return S.crowd==='standing'?this.STAND_DY:0; },
+  merge(parts){
+    const geos=parts.map(([g,x,y,z])=>{ const n=g.toNonIndexed(); n.translate(x,y,z); return n; });
+    const len=geos.reduce((a,g)=>a+g.attributes.position.array.length,0);
+    const pos=new Float32Array(len), nor=new Float32Array(len); let o=0;
+    geos.forEach(g=>{ pos.set(g.attributes.position.array,o); nor.set(g.attributes.normal.array,o); o+=g.attributes.position.array.length; g.dispose(); });
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('normal',new THREE.BufferAttribute(nor,3)); g.computeBoundingSphere(); return g;
+  },
+  geo(kind){ // yerel: orijin basamak zemini, -Z ileri (sandalye geometrisiyle aynı)
+    const B=(w,h,d)=>new THREE.BoxGeometry(w,h,d), H=()=>new THREE.SphereGeometry(0.11,12,9);
+    if(kind==='seated') return this.merge([[B(.40,.14,.42),0,.53,-.12],[B(.34,.45,.14),0,.25,-.36],[B(.44,.58,.26),0,.84,.10],[H(),0,1.24,.06]]);
+    return this.merge([[B(.36,.85,.22),0,.425,-.18],[B(.44,.62,.26),0,1.16,-.18],[H(),0,1.62,-.18]]);
+  },
+  palette:[0x56616b,0x737e88,0x3d4852,0x86796c,0x667788,0x949da5,0x5e5650,0x45505e],
+  build(a,kind){
+    const seats=S.seats, n=seats.length; if(!n||!a.root) return null;
+    const mat=new THREE.MeshLambertMaterial({color:0xffffff});
+    const mesh=new THREE.InstancedMesh(this.geo(kind),mat,n);
+    const m=new THREE.Matrix4(), q=new THREE.Quaternion(), sc=new THREE.Vector3(), up=new THREE.Vector3(0,1,0), v=new THREE.Vector3(), c=new THREE.Color();
+    let seed=1234567; const rnd=()=>{ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; };
+    const mats=new Float32Array(n*16);
+    seats.forEach((s,i)=>{
+      const e=s.eye, L=s.look;
+      q.setFromAxisAngle(up,Math.atan2(-(L[0]-e[0]),-(L[2]-e[2])));
+      const k=0.9+rnd()*0.2; sc.set(0.92+rnd()*0.16,k,1);
+      v.set(e[0],e[1]-EYE_H,e[2]); m.compose(v,q,sc); m.toArray(mats,i*16); mesh.setMatrixAt(i,m);
+      c.setHex(this.palette[Math.floor(rnd()*this.palette.length)]); mesh.setColorAt(i,c);
+    });
+    mesh.instanceMatrix.needsUpdate=true; if(mesh.instanceColor) mesh.instanceColor.needsUpdate=true;
+    mesh.userData={mats, hidden:-1}; mesh.visible=false; a.root.add(mesh); return mesh;
+  },
+  sync(){
+    GL.eachAdapter(a=>{
+      a._crowd=a._crowd||{};
+      ['seated','standing'].forEach(kind=>{
+        const want=S.crowd===kind;
+        if(want && !a._crowd[kind]) a._crowd[kind]=this.build(a,kind);
+        const mesh=a._crowd[kind]; if(!mesh) return;
+        mesh.visible=want;
+        const self=S.seatIdx, ud=mesh.userData;
+        if(want && ud.hidden!==self){
+          const m=new THREE.Matrix4();
+          if(ud.hidden>=0){ m.fromArray(ud.mats,ud.hidden*16); mesh.setMatrixAt(ud.hidden,m); }
+          if(self>=0){ m.makeScale(0,0,0); mesh.setMatrixAt(self,m); }
+          ud.hidden=self; mesh.instanceMatrix.needsUpdate=true;
+        }
+      });
+    });
+  },
+  set(mode){
+    if(S.crowd===mode) return; S.crowd=mode; track('crowd_mode',{mode});
+    if(GL.ok){
+      this.sync();
+      if(S.seatIdx>=0 && GL.seat && GL.seat.eye){ const r=S.seats[S.seatIdx]; GL.seat.eye.y=r.eye[1]+this.eyeOffset(); if(S.mode==='seat' && !GL.tween) GL.applyCam(); }
+      GL.dirty=true;
+    }
+    setModeUI(S.mode==='seat'?'seat':'overview');
+  }
+};
+function renderCrowdSeg(){
+  const el=document.getElementById('crowdSeg'); if(!el) return;
+  el.setAttribute('aria-label',t('crowdLbl'));
+  el.innerHTML=`<span class="cl">${t('crowdLbl')}</span>`+[['empty','crowdEmpty'],['seated','crowdSeated'],['standing','crowdStanding']].map(([k,l])=>`<button type="button" data-crowd="${k}" aria-pressed="${S.crowd===k}">${t(l)}</button>`).join('');
+  el.querySelectorAll('[data-crowd]').forEach(b=>b.onclick=()=>CROWD.set(b.dataset.crowd));
+}
 const S = {
   venue:null, compare:false, venueOpt:'demo', baseUrl:null, seats:[], byCode:new Map(), sections:new Map(),
   sectionId:null, rowId:null, seatIdx:-1, mode:'overview', bounds:null,
-  lang:'tr', themePref:'auto', events:[], viewStart:null, hintShown:false
+  lang:'tr', themePref:'auto', events:[], viewStart:null, hintShown:false, crowd:'empty'
 };
 const SESSION_ID = 'demo-'+Math.random().toString(36).slice(2,8);
 /* Gömme: üst pencere (host) yalnızca izin listesindeki origin'lerden komut gönderebilir; olaylar yalnız bu origin'e gider.
@@ -1210,6 +1287,7 @@ const GL = {
       return tmp;
     };
     this.eachAdapter(a=>{ a.paintSeats(fn); a.setSeatMarker(S.seatIdx>=0?S.seats[S.seatIdx]:null, S.mode==='seat'); });
+    CROWD.sync();
     this.dirty=true;
   },
   resize(){
@@ -1254,7 +1332,7 @@ const GL = {
     if(k>=1){ this.tween=null; tw.done(); this.applyCam(); }
   },
   toSeat(rec, short){ /* karşılaştırmada da tek kamera: iki panel aynı eye'a uçar */
-    const eye=V3(rec.eye), look=V3(rec.look), d=look.clone().sub(eye);
+    const eye=V3(rec.eye); eye.y+=CROWD.eyeOffset(); const look=V3(rec.look), d=look.clone().sub(eye);
     this.seat.eye=eye; this.seat.yaw0=Math.atan2(d.x,d.z); this.seat.pitch0=Math.asin(d.y/d.length()); this.seat.yaw=0; this.seat.pitch=0;
     const fov=this.camera.aspect<0.9?68:58;
     this.flyTo(eye, eye.clone().add(d.normalize().multiplyScalar(20)), fov, short?650:1300, ()=>{ S.mode='seat'; this.paint(); });
@@ -1509,7 +1587,9 @@ function renderSeatbar(){
 function setModeUI(mode){
   $('btnOverview').hidden=mode==='overview';
   if(mode==='overview'){ $('modeTitle').textContent=t('overview'); $('modeSub').textContent=t('modeOverviewSub'); }
-  else { const r=S.seats[S.seatIdx]; $('modeTitle').textContent=t('modeSeat'); $('modeSub').textContent=r?seatName(r):''; }
+  else { const r=S.seats[S.seatIdx]; $('modeTitle').textContent=t('modeSeat'); $('modeSub').textContent=(r?seatName(r):'')+(S.crowd==='standing'?' · '+t('crowdStandNote'):''); }
+  if(S.crowd!=='empty') $('modeSub').textContent+=' · '+t('crowdNote');
+  renderCrowdSeg();
 }
 let hintTimer=0;
 function showHint(){ if(S.hintShown) return; const h=$('hint'); h.textContent=t('dragHint'); h.hidden=false; clearTimeout(hintTimer); hintTimer=setTimeout(hideHint,5000); }
