@@ -34,3 +34,10 @@
 
 ## Açık sorular
 - İşletmeci ve izin makamı · koltuk numaralandırma planı (iTicket'ta numaralı satış var mı?) · bölmeli düzenlerin kullanım sıklığı · salon kirası (çekim günü için ücret istenir mi?).
+
+## Güncelleme (02–04.11.2026, Chrome ile mekân ve bilet siteleri incelendi)
+- Resmî site: bgmonline.net. Mekân **ticari olarak kiralanıyor**; kiralama sayfası ve "Hizmet İletişim Formu" var. Bu yüzden izin yerine **kiralama** yolu öneriliyor (`uc-mekan/01-bgm-kiralama-ve-cekim-talebi.md`).
+- Sitede 5 oturma düzeni planı: Oturmalı-1/2/3, Oturmalı-Ayakta, Ayakta. Toplam 2.370 kişilik oturma; ayakta 6.000.
+- Satış kanalları (Nilüfer, 14.11.2026): **Biletix ve Bubilet**; diğer etkinliklerde iTicket. Bubilet'te tıklanabilir 2D blok haritası (tribün A–K, parter A–C; 6 kategori, ₺3.360–6.160), koltuk görünümü yok.
+- 14 Kasım–20 Aralık arasında 11 etkinlik; **21–28 Kasım arasında etkinlik görünmüyor** → önerilen çekim günleri 24–26 Kasım.
+- İşletmeci hâlâ doğrulanmadı.
