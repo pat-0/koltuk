@@ -1,0 +1,76 @@
+KOLTUKTAN GÖRÜNÜM PROJESİ - BURADAN BAŞLA
+==========================================
+
+Bilet alan kişi, koltuğunu seçmeden önce o koltuktan sahanın/sahnenin
+nasıl göründüğünü görüyor. Biz bu hizmeti bilet şirketlerine, salonlara
+ve kulüplere satmayı planlıyoruz. Bu klasör projenin bütün dosyalarıdır.
+
+Not: .md uzantılı dosyalar düz yazıdır; Not Defteri ile açılabilir.
+.xlsx dosyaları Excel ile, .docx dosyaları Word ile açılır.
+
+
+1) ÖNCE DEMOYU GÖR (5 dakika)
+-----------------------------
+  Telefonda veya bilgisayarda en kolayı: WhatsApp'tan gönderilen link.
+
+  Bilgisayarda bu klasörden:
+    web\demo.html  -> çift tıkla, tarayıcıda açılır (internet gerekli)
+
+  Denenecekler:
+    - Soldaki haritadan bir blok, sonra bir koltuk seç
+    - Görüntüyü sürükleyerek etrafa bak
+    - Sol üstte "Seyirci: Boş / Oturan / Ayakta" seçeneklerini dene
+    - Sağ üstte "Demo ayarları" -> farklı marka ve mekân seçenekleri
+
+  web\etkinlik.html -> demonun bir bilet sitesine gömülmüş hâli
+
+
+2) İŞİ ANLAMAK İÇİN OKU (30 dakika)
+-----------------------------------
+  satis\teklif-tek-sayfa-v2.md       Müşteriye sunduğumuz teklif, tek sayfa
+  satis\satis-plani.md               Kime, nasıl satacağız
+  satis\fiyatlandirma.md             Fiyat modeli (v1)
+  satis\fiyatlandirma-v2-alternatif.md  Alternatif fiyat modeli
+  satis\rakip-arastirmasi-demo-ve-fiyat.md  Rakipler ve fiyatları
+  satis\itiraz-yanit-v2.md           Müşterinin itirazlarına cevaplar
+
+
+3) ŞU AN ÜZERİNDE ÇALIŞTIĞIMIZ: İLK ÜÇ MEKÂN
+--------------------------------------------
+  satis\uc-mekan\00-uc-mekan-plani.md   BGM, Yalova 90. Yıl Spor Salonu,
+                                         Erzincan 13 Şubat Stadyumu planı
+  satis\uc-mekan\01..03                  Mekânlara gidecek yazı/dilekçe taslakları
+  satis\uc-mekan\06-cekim-hazirligi-uc-mekan.md  Çekim hazırlığı, kamera kiralama
+
+  Hiçbir yazı henüz gönderilmedi; hepsi taslak.
+
+
+4) ÇEKİM NASIL YAPILIYOR?
+-------------------------
+  3d\cekim-protokolu.md          Çekim günü adım adım (teknik)
+  3d\ekipman-ve-yazilim.md       Kamera ve yazılımlar
+  3d\isleme-duzeni-mac-bulut.md  Çekimden sonra 3D modelin nasıl üretildiği
+
+
+5) HUKUK
+--------
+  satis\avukat-soru-dosyasi.docx   Avukata soracağımız 23 soru
+  satis\mekan-cekim-izin-formu.md  Mekân çekim izni formu (taslak)
+  satis\pilot-sozlesme-taslagi.md  Pilot müşteri sözleşmesi (taslak)
+  Hepsi taslak; avukat onayı olmadan kullanılmaz.
+
+
+6) TABLOLAR
+-----------
+  satis\hedef-liste.xlsx    Hedef bilet şirketleri, mekânlar, kulüpler
+  satis\takip-tablosu.xlsx  Görüşme takibi
+
+
+KLASÖRLER
+---------
+  web\     Demo sayfası ve kodu
+  satis\   Satış, fiyat, mekân ve hukuk belgeleri
+  3d\      Çekim ve 3D işleme belgeleri ve scriptleri
+  shared\  Ortak veri biçimi (yazılımcılar için)
+  docs\    Sunum kaynakları ve ekran görüntüleri
+  README.md  Yazılımcılar için teknik özet
