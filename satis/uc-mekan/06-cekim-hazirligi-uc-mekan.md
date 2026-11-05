@@ -50,3 +50,16 @@
 - Lazer metre, şerit metre, A4 kontrol hedefleri, iz bırakmayan kâğıt bant
 - MacBook (sahada kart yedekleme ve hızlı önizleme), harici disk (2 kopya)
 - Yaka kartı / yelek, basılı izin yazısı ve çekim planı
+
+## Kamera: kiralama seçenekleri (04.11.2026)
+
+Bütçe kararı nedeniyle kamera **kiralanacak**. Fiyatlar KDV durumu ve depozito koşulları kiralamadan önce teyit edilmeli.
+
+| Kiralayan | Model | Fiyat | Not |
+|---|---|---|---|
+| kiralikkamera724.com (İstanbul Avrupa yakası, Kadıköy; İzmir) | Insta360 X5 Bundle Kit | 1 gün 900 TL · 3 gün 2.160 TL · 7 gün 4.410 TL | Kit içeriği ve depozito sayfada yok |
+| digioneplus.com (İstanbul, Maslak) | Insta360 X5 | Günlük 750 TL + KDV | Yalnız kamera; ek ekipman yok |
+| kiralarsin.com (81 ile kargo) | Insta360 X4 | 2.170 TL / hafta | Depozito yok; kontrol edildiğinde stokta yoktu |
+| Satın alma (karşılaştırma için) | Insta360 X5 | ~24.980 TL (Akakçe, en düşük) | — |
+
+**Öneri:** İlk aşamada her çekim için kiralama. Test çekimi + BGM aynı haftaya denk gelirse tek bir 7 günlük kiralama; Erzincan için yol dahil 3–4 günlük kiralama. Toplam tahmini kira, satın alma fiyatının yaklaşık beşte biri. Yedek bataryalar ayrıca istenmeli (soğukta önemli).
