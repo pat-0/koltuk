@@ -17,6 +17,7 @@ Hyperbaric'in "koltuğundan sahayı/sahneyi gör" ürünü için çalışma depo
 ```
 shared/   Ortak veri formatı (venue.json şeması v0.1 ve v0.2) ve doğrulama notları
 3d/       Çekim protokolü, işleme rehberleri, ekipman listesi, iş planları
+          yontem-b-tribun-lod.md  Alternatif yöntem (tribün parçalı + Spark 2.0), karar Sencer'de
           Betikler: extract_frames, equirect_to_persp, filter_blurry, seats_from_plan,
           align_points, validate_venue, pipeline, ply_to_splat, splat_to_b64
           cloud/    Bulutta (RunPod) eğitim betiği
