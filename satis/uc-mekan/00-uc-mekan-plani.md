@@ -35,7 +35,7 @@ Spor Genel Müdürlüğü İşletme Yönetmeliği'ne göre (RG 09.12.2005, son d
 
 | Dosya | Ne |
 |---|---|
-| `01-bgm-kiralama-ve-cekim-talebi.md` | BGM'ye kiralama formu/e-posta metni + resmî çekim talep yazısı |
+| `01-bgm-ucretsiz-cekim-talebi.md` | BGM: ücretsiz iş birliği (takas) mesajı + resmî çekim talep yazısı |
 | `02-yalova-dilekce.md` | Yalova GSİM'e dilekçe + Yalovaspor Basketbol'a destek yazısı |
 | `03-erzincan-dilekce.md` | Erzincan GSİM'e dilekçe + 24 Erzincanspor'a destek yazısı |
 | `04-mekan-dosyasi-yalova.md` | Yalova 90. Yıl mekân dosyası |
