@@ -1,0 +1,21 @@
+{
+  "v": 4,
+  "createdOnFiles": {"v": 1, "at": "2026-10-31T01:10:00+03:00"},
+  "lists": "css",
+  "title": "Koltuktan Görünüm Proje Paketi",
+  "order": ["cover", "paket", "firsat", "demo", "uc-boru", "uc-betik", "uc-plan", "web-mimari", "web-plan", "hedefler", "fiyat", "pilot", "huni", "rakipler", "demo-mekani", "isleme", "takvim", "kararlar"],
+  "sections": {
+    "s1": {"description": "Paketin özeti, fırsat ve yayındaki demo", "start": "cover"},
+    "s2": {"description": "3D ve çekim rolünün çıktıları", "start": "uc-boru"},
+    "s3": {"description": "Web geliştirici rolünün çıktıları", "start": "web-mimari"},
+    "s4": {"description": "Satış ve iş geliştirme rolünün çıktıları", "start": "hedefler"},
+    "s6": {"description": "Rakip araştırması, demo mekânı ve işleme düzeni önerileri", "start": "rakipler"},
+    "s5": {"description": "Ortak takvim ve verilmesi gereken kararlar", "start": "takvim"}
+  },
+  "faces": {
+    "bricolage-grotesque": {"family": "Bricolage Grotesque", "href": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap"},
+    "ibm-plex-sans": {"family": "IBM Plex Sans", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap"},
+    "ibm-plex-mono": {"family": "IBM Plex Mono", "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap"}
+  },
+  "designSystems": []
+}

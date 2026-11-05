@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+
+# Test ekran görüntüleri (büyük; seçilmiş örnekler docs/ekran-goruntuleri/ altında)
+web/screens/
+
+# İkili splat (tools/make_synthetic_splat.py ile yeniden üretilir; yayında .b64.txt kullanılıyor)
+web/data/ornek.splat
+
+# Genel
+node_modules/
+.DS_Store
+*.log

@@ -1,0 +1,1209 @@
+<title>Koltuktan Saha Görünümü</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,750&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#EDEFEB; --surface:#FFFFFF; --surface-2:#F5F6F3; --surface-3:#E4E7E2;
+  --text:#13171A; --muted:#58616A; --line:#D7DBD4; --line-strong:#B6BDB4;
+  --overlay:rgba(255,255,255,.9); --scrim:rgba(19,23,26,.38);
+  --shadow:0 1px 2px rgba(19,23,26,.06),0 8px 28px rgba(19,23,26,.08);
+  --brand:#0B6E4F; --brand-ink:#FFFFFF; --accent:#C6F432; --accent-ink:#13171A;
+  --cat1:#E0502A; --cat2:#E39B12; --cat3:#22968A; --cat4:#4A77D4; --cat5:#7A8496;
+  --sold:#BCC1BA; --ok:#1C7A4B; --danger:#B3261E;
+  --scene-bg:#C6CBC5; --scene-concrete:#AEB4AD; --scene-concrete-2:#A2A8A1; --scene-wall:#8F958E;
+  --scene-roof:#6E746E; --scene-floor:#5B605B; --scene-dim:#C9CDC7; --scene-truss:#8C928B;
+  --font-display:'Bricolage Grotesque','IBM Plex Sans',system-ui,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:14px; --r-sm:9px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1012; --surface:#15191C; --surface-2:#1B2023; --surface-3:#242A2E;
+    --text:#E6E9E5; --muted:#99A2A9; --line:#2A3136; --line-strong:#3B444B;
+    --overlay:rgba(21,25,28,.9); --scrim:rgba(0,0,0,.55);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --sold:#454C52;
+    --scene-bg:#0A0C0E; --scene-concrete:#3A4146; --scene-concrete-2:#32383D; --scene-wall:#262B30;
+    --scene-roof:#111417; --scene-floor:#181C1F; --scene-dim:#30363B; --scene-truss:#2B3136;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1012; --surface:#15191C; --surface-2:#1B2023; --surface-3:#242A2E;
+  --text:#E6E9E5; --muted:#99A2A9; --line:#2A3136; --line-strong:#3B444B;
+  --overlay:rgba(21,25,28,.9); --scrim:rgba(0,0,0,.55);
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  --sold:#454C52;
+  --scene-bg:#0A0C0E; --scene-concrete:#3A4146; --scene-concrete-2:#32383D; --scene-wall:#262B30;
+  --scene-roof:#111417; --scene-floor:#181C1F; --scene-dim:#30363B; --scene-truss:#2B3136;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.45;overflow:hidden;-webkit-font-smoothing:antialiased}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+h1,h2,h3{font-family:var(--font-display);font-weight:650;letter-spacing:-.01em;margin:0}
+
+.app{height:100%;display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;
+  padding-block:12px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  max-width:1600px;margin:0 auto}
+
+/* Header */
+.top{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{flex:none;display:inline-flex;align-items:center;height:36px;padding:0 12px;border-radius:8px;background:var(--brand);color:var(--brand-ink);
+  font-family:var(--font-display);font-weight:750;font-size:15px;letter-spacing:.06em;white-space:nowrap}
+.logo i{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin-right:8px;font-style:normal}
+.event{min-width:0;flex:1}
+.event h1{font-size:17px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.event p{margin:0;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg{display:inline-flex;background:var(--surface-3);border-radius:10px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;padding:6px 10px;border-radius:7px;font-size:12.5px;font-weight:500;color:var(--muted);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:13px;white-space:nowrap}
+.btn:hover{border-color:var(--line-strong)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink);font-weight:600}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:16px;height:16px;flex:none}
+.only-wide{display:inline-flex}
+.spacer{display:none;flex:1}
+[hidden]{display:none !important}
+.hint[hidden]{display:block !important;opacity:0}
+.dot-live{width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block}
+
+/* Main layout */
+.main{display:grid;grid-template-columns:minmax(300px,370px) minmax(0,1fr);gap:12px;min-height:0;min-width:0}
+.side{min-height:0;min-width:0;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:12px;padding-bottom:4px;scrollbar-width:thin}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;min-width:0}
+.card h2{font-size:15px}
+.card .sub{color:var(--muted);font-size:12.5px;margin:2px 0 0}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+
+/* Map */
+.map-wrap{margin-top:10px;position:relative}
+#map{width:100%;height:auto;display:block;touch-action:manipulation}
+#map .sec{cursor:pointer}
+#map .sec path{stroke-linejoin:round;transition:opacity .15s}
+#map .sec:hover path{filter:brightness(1.1)}
+#map .sec:focus{outline:none}
+#map .sec:focus-visible path.hl{stroke:var(--text);stroke-width:1.6}
+#map text{font-family:var(--font-mono);font-size:3.1px;fill:#fff;pointer-events:none;font-weight:500}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin-top:10px}
+.legend div{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);min-width:0}
+.legend b{font-weight:600;color:var(--text);font-family:var(--font-mono);font-size:11.5px;margin-left:auto}
+.sw{width:11px;height:11px;border-radius:3px;flex:none}
+
+/* Section card */
+.sec-top{display:flex;align-items:center;gap:12px}
+.sec-id{font-family:var(--font-display);font-weight:750;font-size:30px;line-height:1;letter-spacing:-.02em;min-width:64px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:3px 8px;border-radius:999px;background:var(--surface-3);color:var(--text)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:12px 0;font-size:13px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+.bar{height:6px;border-radius:999px;background:var(--surface-3);overflow:hidden;margin-top:4px}
+.bar span{display:block;height:100%;background:var(--ok);border-radius:inherit}
+.row-btns{display:flex;gap:8px;flex-wrap:wrap}
+.row-btns .btn{flex:1}
+
+/* Row/seat */
+.field{display:flex;align-items:center;gap:10px;margin-top:10px}
+.field label{font-size:12.5px;color:var(--muted);min-width:42px}
+.select{flex:1;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);padding:0 10px;min-width:0}
+.strip{display:flex;gap:4px;overflow-x:auto;padding:10px 0 6px;scrollbar-width:thin;min-width:0}
+.strip button{flex:none;width:30px;height:30px;border-radius:7px 7px 9px 9px;border:1px solid var(--line);background:var(--surface-2);font-family:var(--font-mono);font-size:11px;padding:0}
+.strip button.av{border-color:color-mix(in srgb,var(--c) 55%,var(--line));background:color-mix(in srgb,var(--c) 18%,var(--surface))}
+.strip button.sold{background:var(--surface-3);color:var(--muted);text-decoration:line-through;border-style:dashed}
+.strip button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--text);font-weight:600;text-decoration:none}
+.mini-legend{display:flex;gap:12px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.mini-legend span{display:inline-flex;align-items:center;gap:5px}
+.powered{font-size:11.5px;color:var(--muted);text-align:center;padding:2px 0 6px}
+.powered b{font-weight:600;color:var(--text)}
+
+/* Stage */
+.stage{position:relative;min-height:0;min-width:0;border-radius:var(--r);overflow:hidden;background:var(--scene-bg);border:1px solid var(--line)}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;outline:none}
+.stage canvas:active{cursor:grabbing}
+.ov{position:absolute;z-index:2}
+.chip{top:12px;left:12px;max-width:calc(100% - 150px);background:var(--overlay);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:12.5px;display:flex;align-items:center;gap:8px;min-width:0}
+.chip strong{font-family:var(--font-display);font-weight:650;font-size:13.5px;white-space:nowrap}
+.chip span{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr{top:12px;right:12px;display:flex;gap:6px}
+.tr .btn{background:var(--overlay);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hint{left:50%;transform:translateX(-50%);bottom:118px;background:var(--scrim);color:#fff;font-size:12.5px;padding:6px 12px;border-radius:999px;white-space:nowrap;pointer-events:none;transition:opacity .4s}
+.seatbar{left:12px;right:12px;bottom:12px;background:var(--overlay);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;box-shadow:var(--shadow)}
+.sb-title{font-family:var(--font-display);font-weight:650;font-size:16px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:2px}
+.sb-meta b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+.sb-nav{display:flex;gap:4px}
+.icon-btn{width:36px;height:36px;padding:0;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center}
+.icon-btn svg{width:16px;height:16px}
+.icon-btn:disabled{opacity:.4;cursor:not-allowed}
+.nogl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--muted)}
+
+/* Drawer + popover */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:21;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);
+  transform:translateX(102%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dr-head{display:flex;align-items:center;gap:10px;padding:16px max(16px,env(safe-area-inset-right,0px)) 12px 16px;border-bottom:1px solid var(--line)}
+.dr-head h2{font-size:18px;flex:1}
+.dr-body{overflow-y:auto;padding:14px max(16px,env(safe-area-inset-right,0px)) 24px 16px;display:flex;flex-direction:column;gap:16px}
+.dr-body p{margin:0;color:var(--muted);font-size:13px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpi{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px}
+.kpi small{display:block;color:var(--muted);font-size:11.5px}
+.kpi b{font-family:var(--font-display);font-size:22px;font-weight:650;font-variant-numeric:tabular-nums}
+.h3{font-family:var(--font-display);font-size:13.5px;font-weight:650;margin-bottom:6px}
+.tops div{display:grid;grid-template-columns:42px 1fr 28px;gap:8px;align-items:center;font-size:12.5px;margin-bottom:4px}
+.tops i{display:block;height:8px;border-radius:4px;background:var(--brand)}
+.tops b{font-family:var(--font-mono);font-weight:500;text-align:right}
+.log{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;max-height:240px;overflow:auto}
+.log > div{padding:6px 10px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:58px minmax(0,1fr);gap:8px}
+.log > div > div span{display:block}
+.log > div:last-child{border-bottom:0}
+.log em{font-style:normal;color:var(--brand);font-weight:500}
+:root[data-theme="dark"] .log em{color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .log em{color:var(--accent)}}
+.log span{color:var(--muted);word-break:break-all}
+.defs{display:flex;flex-direction:column;gap:8px}
+.defs div{font-size:12.5px}
+.defs code{font-family:var(--font-mono);font-size:12px;background:var(--surface-3);padding:1px 6px;border-radius:5px}
+.defs span{color:var(--muted);display:block;margin-top:2px}
+.empty{color:var(--muted);font-size:12.5px;padding:10px}
+
+.pop{position:fixed;z-index:21;top:62px;right:max(16px,env(safe-area-inset-right,0px));width:min(320px,calc(100% - 32px));background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:14px;display:none;flex-direction:column;gap:12px}
+.pop.on{display:flex}
+.pop label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+.pop .seg{width:100%}
+.pop .seg button{flex:1}
+.brand-list{display:flex;flex-direction:column;gap:6px}
+.brand-opt{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);text-align:left}
+.brand-opt[aria-pressed="true"]{border-color:var(--text)}
+.brand-opt .bl{width:28px;height:20px;border-radius:5px;flex:none;position:relative}
+.brand-opt .bl::after{content:"";position:absolute;right:3px;top:3px;width:6px;height:6px;border-radius:2px;background:var(--a)}
+
+.toast{position:fixed;z-index:30;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  background:var(--text);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:13px;max-width:min(520px,calc(100% - 32px));transition:all .25s;box-shadow:var(--shadow)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast code{font-family:var(--font-mono);font-size:12px;opacity:.8}
+
+@media (max-width: 1080px){ .only-wide{display:none} }
+@media (max-width: 760px){
+  body{font-size:13.5px}
+  .app{gap:10px;padding-block:10px}
+  .main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(300px,52%) minmax(0,1fr);gap:10px}
+  .stage{order:-1}
+  .top{flex-wrap:wrap;row-gap:6px}
+  .event{order:3;flex-basis:100%}
+  .event p{display:none}
+  .event h1{font-size:14.5px}
+  .top .spacer{display:block}
+  .logo{height:32px;padding:0 9px;font-size:13px}
+  .btn{height:34px;padding:0 10px}
+  .hide-sm{display:none}
+  .seatbar{grid-template-columns:auto minmax(0,1fr);gap:8px 8px;padding:9px 10px;left:8px;right:8px;bottom:8px}
+  .seatbar > :first-child{grid-column:1 / -1}
+  .seatbar.compact{grid-template-columns:minmax(0,1fr) auto}
+  .seatbar.compact > :first-child{grid-column:auto}
+  .seatbar .sb-cta .btn{width:100%}
+  .sb-title{font-size:15px}
+  .sb-meta{font-size:12px;gap:4px 9px}
+  .icon-btn{width:34px;height:34px}
+  .hint{bottom:118px}
+  .chip{left:8px;top:8px;max-width:calc(100% - 132px)}
+  .tr{right:8px;top:8px}
+  .pop{top:54px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important}
+}
+</style>
+
+<div class="app" id="app">
+  <header class="top">
+    <span class="logo" id="logo"><i></i><span id="logoText">BİLETRA</span></span>
+    <div class="event">
+      <h1 data-i18n="eventTitle">Kartallar – Yıldızlar</h1>
+      <p data-i18n="eventMeta">Basketbol · Örnek Arena · 14 Kasım 2026 Cmt, 20:30</p>
+    </div>
+    <span class="spacer"></span>
+    <div class="seg only-wide" id="brandSegWide" role="group" aria-label="Marka"></div>
+    <button class="btn" id="btnSettings" aria-haspopup="dialog" aria-expanded="false">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4h7M12 4h2M2 12h3M8 12h6"/><circle cx="10.5" cy="4" r="1.5"/><circle cx="6.5" cy="12" r="1.5"/></svg>
+      <span class="hide-sm" data-i18n="settings">Demo ayarları</span>
+    </button>
+    <button class="btn" id="btnAnalytics" aria-haspopup="dialog" aria-expanded="false">
+      <span class="dot-live" aria-hidden="true"></span>
+      <span data-i18n="whatWeMeasure">Ne ölçüyoruz?</span>
+    </button>
+  </header>
+
+  <main class="main">
+    <aside class="side" id="side">
+      <section class="card" aria-labelledby="mapTitle">
+        <div class="card-head"><h2 id="mapTitle" data-i18n="pickSection">Blok seçin</h2><span class="sub" id="capacityLbl"></span></div>
+        <p class="sub" data-i18n="mapHint">Haritada bir bloğa dokunun ya da 3D görünümde tribüne tıklayın.</p>
+        <div class="map-wrap"><svg id="map" role="group" aria-label="Blok haritası"></svg></div>
+        <div class="legend" id="legend"></div>
+      </section>
+
+      <section class="card" id="secCard" aria-live="polite"></section>
+
+      <section class="card" id="seatCard">
+        <div class="card-head"><h2 data-i18n="rowSeat">Sıra ve koltuk</h2></div>
+        <div class="field"><label for="rowSel" data-i18n="row">Sıra</label><select class="select" id="rowSel"></select></div>
+        <div class="strip" id="strip" role="group" aria-label="Koltuklar"></div>
+        <div class="mini-legend">
+          <span><i class="sw" style="background:color-mix(in srgb,var(--cat3) 30%,var(--surface));border:1px solid var(--cat3)"></i><span data-i18n="available">Müsait</span></span>
+          <span><i class="sw" style="background:var(--surface-3);border:1px dashed var(--line-strong)"></i><span data-i18n="sold">Satıldı</span></span>
+          <span><i class="sw" style="background:var(--accent);border:1px solid var(--text)"></i><span data-i18n="selected">Seçili</span></span>
+        </div>
+      </section>
+      <div class="powered" id="powered"><span data-i18n="poweredBy">Koltuk görünümü altyapısı</span> · <b>Hyperbaric</b></div>
+    </aside>
+
+    <section class="stage" id="stage" aria-label="3D arena görünümü">
+      <canvas id="gl" tabindex="0" aria-label="3D görünüm. Sürükleyerek döndürün."></canvas>
+      <div class="ov chip" id="modeChip"><strong id="modeTitle">Genel bakış</strong><span id="modeSub"></span></div>
+      <div class="ov tr"><button class="btn" id="btnOverview" hidden>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="12" height="8" rx="4"/><rect x="5.5" y="6.5" width="5" height="3" rx="1"/></svg>
+        <span data-i18n="overview">Genel bakış</span></button></div>
+      <div class="ov hint" id="hint" hidden></div>
+      <div class="ov seatbar" id="seatbar"></div>
+    </section>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drTitle">
+  <div class="dr-head"><h2 id="drTitle" data-i18n="whatWeMeasure">Ne ölçüyoruz?</h2>
+    <button class="icon-btn" id="drClose" aria-label="Kapat"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>
+  <div class="dr-body" id="drBody"></div>
+</aside>
+<div class="pop" id="pop" role="dialog" aria-label="Demo ayarları"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+
+/* =====================================================================
+   1) BEYAZ ETİKET — tek BRAND config nesnesi
+   Müşteri entegrasyonunda yalnızca BRAND değiştirilir (ya da embed
+   parametresiyle gelir). Aşağıdaki markalar KURGUSALDIR.
+   ===================================================================== */
+const BRAND_PRESETS = [
+  { id:'biletra',  name:'Biletra',      primary:'#0B6E4F', primaryInk:'#FFFFFF', accent:'#C6F432', accentInk:'#13171A', logoText:'BİLETRA',  showPoweredBy:true },
+  { id:'gisekart', name:'Gişekart',     primary:'#A8261B', primaryInk:'#FFFFFF', accent:'#2EC4B6', accentInk:'#0B1F1D', logoText:'GİŞEKART', showPoweredBy:true },
+  { id:'tribun',   name:'Tribün Bilet', primary:'#1D3A7A', primaryInk:'#FFFFFF', accent:'#FF8A3D', accentInk:'#1A0E05', logoText:'TRİBÜN',   showPoweredBy:true }
+];
+let BRAND = Object.assign({}, BRAND_PRESETS[0]);
+
+/* Bilet API'si yerine geçen MOCK: fiyat ve müsaitlik.
+   Gerçekte: GET /availability?event=..&section=.. ve GET /prices?event=..  */
+const TicketAPI = {
+  prices: { CAT1:4250, CAT2:2900, CAT3:1850, CAT4:1150, CAT5:650 },
+  soldRate: { CAT1:.58, CAT2:.47, CAT3:.36, CAT4:.31, CAT5:.24 },
+  priceFor(cat){ return this.prices[cat] || 0; },
+  isSold(ticketCode, cat){ return hash01(ticketCode) < (this.soldRate[cat] || .3); }
+};
+function hash01(s){ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619);} h^=h>>>13; h=Math.imul(h,0x5bd1e995); h^=h>>>15; return (h>>>0)/4294967296; }
+
+/* =====================================================================
+   2) i18n
+   ===================================================================== */
+const I18N = {
+  tr:{
+    eventTitle:'Kartallar – Yıldızlar', eventMeta:'Basketbol · Örnek Arena · 14 Kasım 2026 Cmt, 20:30',
+    settings:'Demo ayarları', whatWeMeasure:'Ne ölçüyoruz?', pickSection:'Blok seçin',
+    mapHint:'Haritada bir bloğa dokunun ya da 3D görünümde tribüne tıklayın.',
+    rowSeat:'Sıra ve koltuk', row:'Sıra', seat:'Koltuk', section:'Blok', available:'Müsait', sold:'Satıldı', selected:'Seçili',
+    poweredBy:'Koltuk görünümü altyapısı', overview:'Genel bakış', openView:'Görünümü aç', cta:'Bu koltuğu seç', soldCta:'Bu koltuk satıldı',
+    samplePrice:'Örnek fiyat', category:'Kategori', availability:'Müsaitlik', seatsAvail:'{a} / {t} koltuk',
+    rowsCount:'{n} sıra', capacity:'{n} koltuk', tier_lower:'Alt Kat', tier_upper:'Üst Kat', tier_middle:'Orta Kat', tier_vip:'VIP', tier_floor:'Parke',
+    modeOverviewSub:'Döndürmek için sürükleyin, yakınlaştırmak için kaydırın', modeSeat:'Koltuk görünümü',
+    dragHint:'Sürükleyerek etrafa bakın · kaydırarak yakınlaştırın', distance:'Sahaya', elevation:'Açı', pickSeatPrompt:'Bir koltuk seçin ya da görünümü açın',
+    prevSeat:'Önceki koltuk', nextSeat:'Sonraki koltuk', rowFront:'Öndeki sıra', rowBack:'Arkadaki sıra',
+    toastCta:'Demo: {seat} seçildi. Gerçek entegrasyonda sepete eklenir.', toastCopied:'Olaylar panoya kopyalandı.', toastCopyFail:'Kopyalanamadı; olaylar konsola yazıldı.',
+    brand:'Bilet markası', language:'Dil', theme:'Tema', themeAuto:'Otomatik', themeLight:'Açık', themeDark:'Koyu',
+    brandNote:'Kurgusal markalar. Müşteriye kendi renk ve logosuyla gösterin.',
+    aIntro:'Her etkileşim bir olaya dönüşür. Bilet akışınızdaki satın alma verisiyle birleştiğinde hangi görünümün satışı artırdığını gösterir. Bu demo olayları yalnızca bellekte tutar.',
+    kSection:'Blok görüntüleme', kSeat:'Koltuk görüntüleme', kAvg:'Ort. bakış süresi', kConv:'Görünümden seçime',
+    topSections:'En çok bakılan bloklar', eventLog:'Olay günlüğü', events:'Olaylar', noEvents:'Henüz olay yok. Bir blok ya da koltuk seçin.',
+    copyJson:'JSON kopyala', clear:'Temizle', close:'Kapat',
+    d_section_view:'Kullanıcı bir bloğu açtı (harita ya da 3D). Hangi bloklar ilgi görüyor?',
+    d_seat_view:'Kullanıcı koltuktan görünümü açtı. Fiyat kategorisi ve kaynakla birlikte.',
+    d_view_duration:'Koltuk görünümünde geçen süre (ms). Kararsızlık ve ilgi göstergesi.',
+    d_cta_click:'“Bu koltuğu seç” tıklandı. Satın alma hunisine geçiş; dönüşümün paydası.',
+    seatName:'{s} · Sıra {r} · Koltuk {k}', errVenue:'venue.json okunamadı: {m}', noGL:'Bu cihazda 3D (WebGL) kullanılamıyor. Blok haritası ve koltuk seçimi çalışmaya devam eder.',
+    mapLabel:'Blok haritası', court:'SAHA'
+  },
+  en:{
+    eventTitle:'Eagles – Stars', eventMeta:'Basketball · Sample Arena · Sat 14 Nov 2026, 20:30',
+    settings:'Demo settings', whatWeMeasure:'What we measure', pickSection:'Choose a section',
+    mapHint:'Tap a section on the map or click the stands in 3D.',
+    rowSeat:'Row and seat', row:'Row', seat:'Seat', section:'Section', available:'Available', sold:'Sold', selected:'Selected',
+    poweredBy:'Seat view technology', overview:'Overview', openView:'Open view', cta:'Select this seat', soldCta:'This seat is sold',
+    samplePrice:'Sample price', category:'Category', availability:'Availability', seatsAvail:'{a} / {t} seats',
+    rowsCount:'{n} rows', capacity:'{n} seats', tier_lower:'Lower Tier', tier_upper:'Upper Tier', tier_middle:'Middle Tier', tier_vip:'VIP', tier_floor:'Floor',
+    modeOverviewSub:'Drag to rotate, scroll to zoom', modeSeat:'Seat view',
+    dragHint:'Drag to look around · scroll to zoom', distance:'To court', elevation:'Angle', pickSeatPrompt:'Pick a seat or open the view',
+    prevSeat:'Previous seat', nextSeat:'Next seat', rowFront:'Row in front', rowBack:'Row behind',
+    toastCta:'Demo: {seat} selected. In production it goes to the basket.', toastCopied:'Events copied to clipboard.', toastCopyFail:'Copy failed; events logged to console.',
+    brand:'Ticketing brand', language:'Language', theme:'Theme', themeAuto:'Auto', themeLight:'Light', themeDark:'Dark',
+    brandNote:'Fictional brands. Show prospects their own colours and logo.',
+    aIntro:'Every interaction becomes an event. Joined with purchase data from your ticketing flow, it shows which views drive sales. This demo keeps events in memory only.',
+    kSection:'Section views', kSeat:'Seat views', kAvg:'Avg. view time', kConv:'View to select',
+    topSections:'Most viewed sections', eventLog:'Event log', events:'Events', noEvents:'No events yet. Pick a section or a seat.',
+    copyJson:'Copy JSON', clear:'Clear', close:'Close',
+    d_section_view:'User opened a section (map or 3D). Which sections attract interest?',
+    d_seat_view:'User opened the view from a seat, with price category and source.',
+    d_view_duration:'Time spent in a seat view (ms). Signals interest and hesitation.',
+    d_cta_click:'“Select this seat” clicked. Entry to the purchase funnel; numerator of conversion.',
+    seatName:'{s} · Row {r} · Seat {k}', errVenue:'Could not read venue.json: {m}', noGL:'3D (WebGL) is not available on this device. The section map and seat picker still work.',
+    mapLabel:'Section map', court:'COURT'
+  }
+};
+const CATS = {
+  CAT1:{ tr:'Kategori 1 · Saha kenarı', en:'Category 1 · Courtside', token:'--cat1' },
+  CAT2:{ tr:'Kategori 2 · Alt kat orta', en:'Category 2 · Lower centre', token:'--cat2' },
+  CAT3:{ tr:'Kategori 3 · Alt kat köşe', en:'Category 3 · Lower corner', token:'--cat3' },
+  CAT4:{ tr:'Kategori 4 · Üst kat orta', en:'Category 4 · Upper centre', token:'--cat4' },
+  CAT5:{ tr:'Kategori 5 · Üst kat', en:'Category 5 · Upper', token:'--cat5' }
+};
+
+/* =====================================================================
+   3) DEMO VERİSİ — venue.json şemasına (v0.1) uygun nesne üretir.
+   Görüntüleyici YALNIZCA bu nesneyi okur. Gerçek mekânda bu nesne
+   3D ekibinin ürettiği venue.json'dan gelir: loadVenue(obj).
+   `venue.scene.params` demo uzantısıdır (yalnız kind:"procedural").
+   ===================================================================== */
+function generateDemoVenue(){
+  const params = {
+    court:[28,15], core:[15,8.5], roofHeight:27, seatPitch:0.52, aisle:1.1, seatHeight:0.45, eyeHeight:1.15,
+    tiers:[
+      { tier:'lower', d0:3.0,  rows:14, depth:0.85, h0:0.5, riser:0.42 },
+      { tier:'upper', d0:17.9, rows:17, depth:0.90, h0:9.4, riser:0.58 }
+    ]
+  };
+  const H=1/3, T=2/3;
+  const defs = [
+    // [tierIndex, segment, f0, f1, priceCategory]
+    [0,0,0,1,'CAT3'],[0,1,0,1,'CAT3'],[0,2,0,H,'CAT2'],[0,2,H,T,'CAT1'],[0,2,T,1,'CAT2'],[0,3,0,1,'CAT3'],
+    [0,4,0,1,'CAT3'],[0,5,0,1,'CAT3'],[0,6,0,H,'CAT2'],[0,6,H,T,'CAT1'],[0,6,T,1,'CAT2'],[0,7,0,1,'CAT3'],
+    [1,0,0,1,'CAT5'],[1,1,0,.5,'CAT5'],[1,1,.5,1,'CAT5'],[1,2,0,H,'CAT4'],[1,2,H,T,'CAT4'],[1,2,T,1,'CAT4'],[1,3,0,.5,'CAT5'],[1,3,.5,1,'CAT5'],
+    [1,4,0,1,'CAT5'],[1,5,0,.5,'CAT5'],[1,5,.5,1,'CAT5'],[1,6,0,H,'CAT4'],[1,6,H,T,'CAT4'],[1,6,T,1,'CAT4'],[1,7,0,.5,'CAT5'],[1,7,.5,1,'CAT5']
+  ];
+  const focus=[0,1.0,0];
+  const r2=v=>Math.round(v*100)/100;
+  const counters=[100,200];
+  const sections=[], viewpoints=[]; let capacity=0;
+  for(const [ti,seg,f0,f1,cat] of defs){
+    const tier=params.tiers[ti];
+    const id=String(++counters[ti]);
+    const sec={ id, name:(ti===0?'Alt Kat ':'Üst Kat ')+id, tier:tier.tier, priceCategory:cat, rows:[] };
+    for(let r=0;r<tier.rows;r++){
+      const d=tier.d0+r*tier.depth, h=tier.h0+r*tier.riser, dEye=d+0.42;
+      const len=segLength(params.core,seg,dEye)*(f1-f0);
+      const n=Math.max(0,Math.floor((len-params.aisle)/params.seatPitch));
+      const pad=(len-n*params.seatPitch)/2;
+      const row={ id:String(r+1), seats:[] };
+      for(let i=0;i<n;i++){
+        const f=f0+((pad+(i+.5)*params.seatPitch)/len)*(f1-f0);
+        const p=curvePoint(params.core,seg,f,dEye);
+        const sid=String(i+1);
+        row.seats.push({ id:sid, ticketCode:id+'-'+row.id+'-'+sid, eye:[r2(p.x), r2(h+params.seatHeight+params.eyeHeight), r2(p.z)] });
+      }
+      capacity+=n; sec.rows.push(row);
+    }
+    sections.push(sec);
+    const vr=sec.rows[Math.floor(sec.rows.length*.35)], vs=vr.seats[Math.floor(vr.seats.length/2)];
+    if(vs) viewpoints.push({ id:'vp-'+id+'-mid', sectionId:id, eye:vs.eye.slice(), lookAt:focus.slice(), capture:null });
+  }
+  return {
+    schemaVersion:'0.1',
+    venue:{ id:'ornek-arena', name:'Örnek Arena', type:'arena', capacity, focus,
+      scene:{ kind:'procedural', url:null, transform:{ position:[0,0,0], rotationY:0, scale:1 }, params } },
+    sections, viewpoints
+  };
+}
+/* Yuvarlatılmış dikdörtgen kase: 0,2,4,6 düz kenar; 1,3,5,7 köşe yayları. d = çekirdek dikdörtgenden uzaklık. */
+function segLength(core,seg,d){ return seg%2===0 ? (seg%4===0 ? 2*core[1] : 2*core[0]) : Math.PI/2*d; }
+function curvePoint(core,seg,f,d){
+  const cx=core[0], cz=core[1];
+  const arc=(ox,oz,a0)=>{ const a=a0+f*Math.PI/2; return {x:ox+d*Math.cos(a), z:oz+d*Math.sin(a), nx:Math.cos(a), nz:Math.sin(a)}; };
+  switch(seg){
+    case 0: return {x:cx+d, z:-cz+2*cz*f, nx:1, nz:0};
+    case 1: return arc(cx,cz,0);
+    case 2: return {x:cx-2*cx*f, z:cz+d, nx:0, nz:1};
+    case 3: return arc(-cx,cz,Math.PI/2);
+    case 4: return {x:-cx-d, z:cz-2*cz*f, nx:-1, nz:0};
+    case 5: return arc(-cx,-cz,Math.PI);
+    case 6: return {x:-cx+2*cx*f, z:-cz-d, nx:0, nz:-1};
+    default: return arc(cx,-cz,Math.PI*1.5);
+  }
+}
+
+/* =====================================================================
+   4) SAHNE ADAPTÖRLERİ
+   SceneAdapter: görüntüleyici çekirdeği (kamera, UI, analitik) sahnenin
+   NASIL çizildiğini bilmez. ProceduralScene bugün; SplatScene yarın.
+   ===================================================================== */
+class SceneAdapter {
+  /** @param {THREE.Scene} scene */
+  constructor(scene){ this.scene=scene; }
+  /** venue nesnesinden sahneyi kur */ build(venue, ctx){}
+  /** tema token'ları değişti */ setTheme(tokens){}
+  /** marka değişti (LED bant, skorbord, saha boyası) */ setBrand(brand){}
+  /** koltuk renklerini yenile: fn(seatIndex) -> THREE.Color */ paintSeats(fn){}
+  /** seçili koltuk işaretçisi (null = gizle); hideOwn: koltuk görünümünde kendi işaretçisini gizle */ setSeatMarker(seatRec, hideOwn){}
+  /** ışın ile koltuk seç: seatIndex | -1 */ pick(raycaster){ return -1; }
+  dispose(){}
+}
+
+class ProceduralScene extends SceneAdapter {
+  build(venue, ctx){
+    this.ctx=ctx; const p=venue.venue.scene.params||null; this.params=p;
+    this.root=new THREE.Group(); this.scene.add(this.root);
+    const T=venue.venue.scene.transform||{};
+    if(T.position) this.root.position.fromArray(T.position);
+    if(T.rotationY) this.root.rotation.y=T.rotationY;
+    if(T.scale) this.root.scale.setScalar(T.scale);
+    this.mats={
+      concrete:new THREE.MeshLambertMaterial({vertexColors:true, side:THREE.DoubleSide}),
+      wall:new THREE.MeshLambertMaterial({color:0x888888}),
+      roof:new THREE.MeshLambertMaterial({color:0x666666}),
+      floor:new THREE.MeshLambertMaterial({color:0x555555}),
+      led:new THREE.MeshBasicMaterial({color:0xffffff, side:THREE.DoubleSide}),
+      truss:new THREE.LineBasicMaterial({color:0x888888}),
+      apron:new THREE.MeshLambertMaterial({color:0x333333})
+    };
+    if(p) this.buildShell(p);
+    this.buildSeats(ctx.seats);
+    this.buildMarker();
+  }
+  buildShell(p){
+    const core=p.core, samples=[];
+    for(let s=0;s<8;s++){ const k=s%2===0?1:12; for(let i=0;i<=k;i++){ if(i===0 && samples.length) continue; samples.push([s,i/k]); } }
+    const ring=d=>samples.map(([s,f])=>{ const q=curvePoint(core,s,f,d); return [q.x,q.z]; });
+    const pos=[], col=[];
+    const cA=new THREE.Color(), cB=new THREE.Color();
+    this._shellColors=[]; // [rowParity] -> vertex ranges
+    const quad=(a,b,c,d,parity)=>{ pos.push(...a,...b,...c, ...a,...c,...d); for(let i=0;i<6;i++){ col.push(parity,0,0);} };
+    const strip=(rA,yA,rB,yB,parity)=>{ for(let i=0;i<rA.length-1;i++){ quad([rA[i][0],yA,rA[i][1]],[rA[i+1][0],yA,rA[i+1][1]],[rB[i+1][0],yB,rB[i+1][1]],[rB[i][0],yB,rB[i][1]],parity); } };
+    let prevTop=0, prevOuter=null;
+    p.tiers.forEach((t,ti)=>{
+      if(ti>0 && prevOuter!==null){ strip(ring(prevOuter),prevTop,ring(t.d0),prevTop,2); }
+      for(let r=0;r<t.rows;r++){
+        const d=t.d0+r*t.depth, h=t.h0+r*t.riser, hPrev=r===0?prevTop:h-t.riser;
+        const R=ring(d);
+        strip(R,hPrev,R,h,3);                         // dikme (riser)
+        strip(R,h,ring(d+t.depth),h,r%2);             // basamak (tread)
+      }
+      prevTop=t.h0+(t.rows-1)*t.riser; prevOuter=t.d0+t.rows*t.depth;
+    });
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+    this._parity=new Float32Array(col.filter((_,i)=>i%3===0));
+    g.setAttribute('color',new THREE.Float32BufferAttribute(new Float32Array(col.length),3));
+    g.computeVertexNormals();
+    this.shell=new THREE.Mesh(g,this.mats.concrete); this.root.add(this.shell);
+
+    // Arka duvar + çatı (tek yüzlü: dışarıdan bakınca görünmez -> genel bakışta kesit etkisi)
+    const outer=prevOuter, top=prevTop, roofY=p.roofHeight;
+    const Ro=ring(outer); const wallPos=[];
+    const tri=(a,b,c,n)=>{ const ab=new THREE.Vector3().subVectors(b,a), ac=new THREE.Vector3().subVectors(c,a); const cr=ab.cross(ac); if(cr.dot(n)<0) wallPos.push(a.x,a.y,a.z,c.x,c.y,c.z,b.x,b.y,b.z); else wallPos.push(a.x,a.y,a.z,b.x,b.y,b.z,c.x,c.y,c.z); };
+    const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+    for(let i=0;i<Ro.length-1;i++){
+      const a=Ro[i], b=Ro[i+1]; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2; const n=V(-mx,0,-mz).normalize();
+      tri(V(a[0],top,a[1]),V(b[0],top,b[1]),V(b[0],roofY,b[1]),n); tri(V(a[0],top,a[1]),V(b[0],roofY,b[1]),V(a[0],roofY,a[1]),n);
+    }
+    const wg=new THREE.BufferGeometry(); wg.setAttribute('position',new THREE.Float32BufferAttribute(wallPos,3)); wg.computeVertexNormals();
+    this.root.add(new THREE.Mesh(wg,this.mats.wall));
+    const roofPos=[]; const down=V(0,-1,0);
+    const tri2=(a,b,c)=>{ const cr=new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(c,a)); if(cr.dot(down)<0) roofPos.push(a.x,a.y,a.z,c.x,c.y,c.z,b.x,b.y,b.z); else roofPos.push(a.x,a.y,a.z,b.x,b.y,b.z,c.x,c.y,c.z); };
+    for(let i=0;i<Ro.length-1;i++) tri2(V(0,roofY,0),V(Ro[i][0],roofY,Ro[i][1]),V(Ro[i+1][0],roofY,Ro[i+1][1]));
+    const rg=new THREE.BufferGeometry(); rg.setAttribute('position',new THREE.Float32BufferAttribute(roofPos,3)); rg.computeVertexNormals();
+    this.root.add(new THREE.Mesh(rg,this.mats.roof));
+    // Çatı makas ızgarası
+    const tl=[]; const span=outer+core[0];
+    for(let x=-span;x<=span;x+=6){ tl.push(x,roofY-.6,-(outer+core[1]), x,roofY-.6,(outer+core[1])); }
+    for(let z=-(outer+core[1]);z<=outer+core[1];z+=6){ tl.push(-span,roofY-.6,z, span,roofY-.6,z); }
+    const tg=new THREE.BufferGeometry(); tg.setAttribute('position',new THREE.Float32BufferAttribute(tl,3));
+    this.truss=new THREE.LineSegments(tg,this.mats.truss); this.root.add(this.truss);
+
+    // LED bant: üst kat ön cephesi (marka vurgu rengi)
+    const up=p.tiers[1]||p.tiers[0]; const lowTop=p.tiers[0].h0+(p.tiers[0].rows-1)*p.tiers[0].riser;
+    const ledD=up.d0-0.03, y0=lowTop+(up.h0-lowTop)*0.45, y1=lowTop+(up.h0-lowTop)*0.8;
+    const lp=[]; const RL=ring(ledD);
+    for(let i=0;i<RL.length-1;i++){ const a=RL[i], b=RL[i+1]; lp.push(a[0],y0,a[1], b[0],y0,b[1], b[0],y1,b[1], a[0],y0,a[1], b[0],y1,b[1], a[0],y1,a[1]); }
+    const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.Float32BufferAttribute(lp,3));
+    this.root.add(new THREE.Mesh(lg,this.mats.led));
+
+    // Zemin (kase içi) + saha kenarı + saha
+    const floorPos=[]; const R0=ring(p.tiers[0].d0);
+    for(let i=0;i<R0.length-1;i++){ floorPos.push(0,0,0, R0[i+1][0],0,R0[i+1][1], R0[i][0],0,R0[i][1]); }
+    const fg=new THREE.BufferGeometry(); fg.setAttribute('position',new THREE.Float32BufferAttribute(floorPos,3)); fg.computeVertexNormals();
+    const fm=new THREE.Mesh(fg,this.mats.floor); fm.material.side=THREE.DoubleSide; this.root.add(fm);
+    const [cl,cw]=p.court;
+    const apron=new THREE.Mesh(new THREE.PlaneGeometry(cl+5,cw+4),this.mats.apron); apron.rotation.x=-Math.PI/2; apron.position.y=0.01; this.root.add(apron);
+    this.courtCanvas=document.createElement('canvas'); this.courtCanvas.width=1400; this.courtCanvas.height=750;
+    this.courtTex=new THREE.CanvasTexture(this.courtCanvas); this.courtTex.anisotropy=4;
+    const court=new THREE.Mesh(new THREE.PlaneGeometry(cl,cw),new THREE.MeshLambertMaterial({map:this.courtTex}));
+    court.rotation.x=-Math.PI/2; court.position.y=0.02; this.root.add(court);
+    this.buildHoops(cl);
+    this.buildScoreboard(p);
+  }
+  buildHoops(cl){
+    const white=new THREE.MeshLambertMaterial({color:0xf2f2f2}), dark=new THREE.MeshLambertMaterial({color:0x2b2f33});
+    this.rimMat=new THREE.MeshBasicMaterial({color:0xE0502A});
+    [-1,1].forEach(sg=>{
+      const g=new THREE.Group();
+      const board=new THREE.Mesh(new THREE.BoxGeometry(0.05,1.05,1.8),white); board.position.set(sg*(cl/2-1.2),3.43,0); g.add(board);
+      const rim=new THREE.Mesh(new THREE.TorusGeometry(0.23,0.02,6,20),this.rimMat); rim.rotation.x=Math.PI/2; rim.position.set(sg*(cl/2-1.575),3.05,0); g.add(rim);
+      const pole=new THREE.Mesh(new THREE.BoxGeometry(0.35,3.3,0.35),dark); pole.position.set(sg*(cl/2+1.4),1.65,0); g.add(pole);
+      const arm=new THREE.Mesh(new THREE.BoxGeometry(2.6,0.18,0.18),dark); arm.position.set(sg*(cl/2+0.15),3.2,0); g.add(arm);
+      const base=new THREE.Mesh(new THREE.BoxGeometry(1.4,0.8,1.6),this.mats.apron); base.position.set(sg*(cl/2+1.8),0.4,0); g.add(base);
+      this.root.add(g);
+    });
+  }
+  buildScoreboard(p){
+    const g=new THREE.Group(); g.position.set(0,14.6,0);
+    const body=new THREE.Mesh(new THREE.BoxGeometry(6.2,3.6,6.2),new THREE.MeshLambertMaterial({color:0x1d2124})); g.add(body);
+    this.sbCanvas=document.createElement('canvas'); this.sbCanvas.width=512; this.sbCanvas.height=280;
+    this.sbTex=new THREE.CanvasTexture(this.sbCanvas);
+    const scr=new THREE.MeshBasicMaterial({map:this.sbTex});
+    for(let i=0;i<4;i++){ const m=new THREE.Mesh(new THREE.PlaneGeometry(5.7,3.1),scr); const a=i*Math.PI/2; m.position.set(Math.sin(a)*3.11,0,Math.cos(a)*3.11); m.rotation.y=a; g.add(m); }
+    this.sbRing=new THREE.Mesh(new THREE.CylinderGeometry(3.5,3.5,0.32,32,1,true),this.mats.led); this.sbRing.position.y=-1.95; g.add(this.sbRing);
+    const cab=[]; [[-2.8,-2.8],[2.8,-2.8],[2.8,2.8],[-2.8,2.8]].forEach(([x,z])=>cab.push(x,1.8,z, x*1.4,p.roofHeight-14.6,z*1.4));
+    const cg=new THREE.BufferGeometry(); cg.setAttribute('position',new THREE.Float32BufferAttribute(cab,3)); g.add(new THREE.LineSegments(cg,this.mats.truss));
+    this.root.add(g);
+  }
+  drawCourt(brand){
+    if(!this.courtCanvas) return;
+    const c=this.courtCanvas, x=c.getContext('2d'), W=c.width, Hh=c.height, s=W/28;
+    x.fillStyle='#C99A62'; x.fillRect(0,0,W,Hh);
+    for(let i=0;i<Hh;i+=9){ x.fillStyle=(i/9)%2? 'rgba(120,70,20,.06)':'rgba(255,240,210,.05)'; x.fillRect(0,i,W,9); }
+    const X=m=>m*s, Y=m=>m*s;
+    x.fillStyle=brand.primary;
+    x.fillRect(0,Y(7.5-2.45),X(5.8),Y(4.9)); x.fillRect(W-X(5.8),Y(7.5-2.45),X(5.8),Y(4.9));
+    x.beginPath(); x.arc(W/2,Hh/2,Y(1.8),0,Math.PI*2); x.fill();
+    x.strokeStyle='#fff'; x.lineWidth=Math.max(3,s*.06);
+    x.strokeRect(2,2,W-4,Hh-4);
+    x.beginPath(); x.moveTo(W/2,0); x.lineTo(W/2,Hh); x.stroke();
+    x.beginPath(); x.arc(W/2,Hh/2,Y(1.8),0,Math.PI*2); x.stroke();
+    [0,1].forEach(side=>{
+      const bx=side? W-X(1.575):X(1.575), dir=side?-1:1;
+      x.strokeRect(side?W-X(5.8):0,Y(7.5-2.45),X(5.8),Y(4.9));
+      x.beginPath(); x.arc(side?W-X(5.8):X(5.8),Hh/2,Y(1.8),0,Math.PI*2); x.stroke();
+      x.beginPath(); x.moveTo(side?W:0,Y(.9)); x.lineTo(side?W-X(2.99):X(2.99),Y(.9));
+      const ang=Math.acos((7.5-.9)/6.75);
+      x.stroke();
+      x.beginPath();
+      const a0=side? Math.PI+ (Math.PI/2-ang) : -(Math.PI/2-ang), a1=side? Math.PI-(Math.PI/2-ang) : (Math.PI/2-ang);
+      x.arc(bx,Hh/2,Y(6.75),a0,a1,side?true:false); x.stroke();
+      x.beginPath(); x.moveTo(side?W:0,Hh-Y(.9)); x.lineTo(side?W-X(2.99):X(2.99),Hh-Y(.9)); x.stroke();
+      x.beginPath(); x.arc(bx,Hh/2,Y(1.25),dir>0?-Math.PI/2:Math.PI/2,dir>0?Math.PI/2:Math.PI*1.5); x.stroke();
+    });
+    x.save(); x.translate(W/2,Hh/2); x.fillStyle='#fff'; x.font='700 '+Math.round(s*.85)+'px "Bricolage Grotesque", sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText(brand.logoText,0,0); x.restore();
+    this.courtTex.needsUpdate=true;
+  }
+  drawScoreboard(brand, lang){
+    if(!this.sbCanvas) return;
+    const c=this.sbCanvas, x=c.getContext('2d');
+    x.fillStyle='#07090a'; x.fillRect(0,0,512,280);
+    x.fillStyle=brand.primary; x.fillRect(0,0,512,54);
+    x.fillStyle='#fff'; x.font='700 30px "Bricolage Grotesque", sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText(brand.logoText,256,28);
+    const home=lang==='en'?'EAG':'KAR', away=lang==='en'?'STA':'YIL';
+    x.font='600 30px "IBM Plex Mono", monospace'; x.fillStyle='#cfd5d9'; x.fillText(home,110,96); x.fillText(away,402,96);
+    x.font='600 92px "IBM Plex Mono", monospace'; x.fillStyle='#fff'; x.fillText('64',110,170); x.fillText('58',402,170);
+    x.fillStyle=brand.accent; x.font='600 34px "IBM Plex Mono", monospace'; x.fillText('Q3 04:12',256,150);
+    x.fillStyle='#8a949b'; x.font='500 20px "IBM Plex Mono", monospace'; x.fillText(lang==='en'?'SAMPLE ARENA':'ÖRNEK ARENA',256,246);
+    this.sbTex.needsUpdate=true;
+  }
+  buildSeats(seats){
+    // Sandalye: oturak + sırtlık, tek geometri (yerel -Z = ileri/sahaya doğru)
+    const a=new THREE.BoxGeometry(0.46,0.07,0.42).toNonIndexed(); a.translate(0,0.43,0.02);
+    const b=new THREE.BoxGeometry(0.46,0.42,0.06).toNonIndexed(); b.translate(0,0.66,0.22);
+    const pos=new Float32Array(a.attributes.position.count*3+b.attributes.position.count*3);
+    pos.set(a.attributes.position.array,0); pos.set(b.attributes.position.array,a.attributes.position.array.length);
+    const nor=new Float32Array(pos.length);
+    nor.set(a.attributes.normal.array,0); nor.set(b.attributes.normal.array,a.attributes.normal.array.length);
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(pos,3)); g.setAttribute('normal',new THREE.BufferAttribute(nor,3));
+    g.computeBoundingSphere();
+    const mesh=new THREE.InstancedMesh(g,new THREE.MeshLambertMaterial({color:0xffffff}),seats.length);
+    const m=new THREE.Matrix4(), q=new THREE.Quaternion(), sc=new THREE.Vector3(1,1,1), up=new THREE.Vector3(0,1,0), v=new THREE.Vector3();
+    const white=new THREE.Color(1,1,1);
+    seats.forEach((s,i)=>{
+      const e=s.eye, L=s.look;
+      const yaw=Math.atan2(-(L[0]-e[0]),-(L[2]-e[2]));
+      q.setFromAxisAngle(up,yaw);
+      v.set(e[0],e[1]-1.15-0.45,e[2]);
+      m.compose(v,q,sc); mesh.setMatrixAt(i,m); mesh.setColorAt(i,white);
+    });
+    mesh.instanceMatrix.needsUpdate=true;
+    this.seatMesh=mesh; this.root.add(mesh);
+  }
+  buildMarker(){
+    const g=new THREE.Group();
+    this.markerMat=new THREE.MeshBasicMaterial({color:0xffffff});
+    const cone=new THREE.Mesh(new THREE.ConeGeometry(0.45,1.2,16),this.markerMat); cone.rotation.x=Math.PI; cone.position.y=0.6; g.add(cone);
+    const ball=new THREE.Mesh(new THREE.SphereGeometry(0.6,16,12),this.markerMat); ball.position.y=1.5; g.add(ball);
+    const dot=new THREE.Mesh(new THREE.SphereGeometry(0.24,12,8),new THREE.MeshBasicMaterial({color:0x13171a})); dot.position.set(0,1.5,0); dot.scale.set(1,1,1);
+    g.add(dot); this.markerDot=dot;
+    g.visible=false; this.marker=g; this.root.add(g);
+  }
+  setTheme(t){
+    const tint=(hex,mul)=>new THREE.Color(hex).multiplyScalar(mul);
+    const c0=new THREE.Color(t.concrete), c1=new THREE.Color(t.concrete2), c2=tint(t.concrete,0.85), c3=tint(t.wall,1);
+    if(this.shell){
+      const col=this.shell.geometry.attributes.color;
+      for(let i=0;i<this._parity.length;i++){ const k=this._parity[i]; const c=k===0?c0:k===1?c1:k===2?c2:c3; col.setXYZ(i,c.r,c.g,c.b); }
+      col.needsUpdate=true;
+    }
+    this.mats.wall.color.set(t.wall); this.mats.roof.color.set(t.roof); this.mats.floor.color.set(t.floor);
+    this.mats.truss.color.set(t.truss);
+  }
+  setBrand(brand, lang){
+    this.mats.led.color.set(brand.accent);
+    this.mats.apron.color.set(brand.primary).multiplyScalar(0.55);
+    this.markerMat.color.set(brand.accent);
+    this.drawCourt(brand); this.drawScoreboard(brand, lang);
+  }
+  paintSeats(fn){
+    const m=this.seatMesh; for(let i=0;i<m.count;i++) m.setColorAt(i,fn(i));
+    m.instanceColor.needsUpdate=true;
+  }
+  setSeatMarker(rec, hide){
+    if(!rec){ this.marker.visible=false; return; }
+    this.marker.position.set(rec.eye[0],rec.eye[1]-0.6,rec.eye[2]);
+    this.marker.visible=!hide;
+  }
+  pick(ray){
+    // Koltuklar arası boşluğa (basamağa) dokunulursa en yakın koltuğu seç: dokunma hedefi büyür.
+    const objs=this.shell?[this.seatMesh,this.shell]:[this.seatMesh];
+    const hits=ray.intersectObjects(objs,false); if(!hits.length) return -1;
+    const h=hits[0]; if(h.object===this.seatMesh) return h.instanceId;
+    const pt=this.root.worldToLocal(h.point.clone()); let best=-1, bd=1.6*1.6;
+    const seats=this.ctx.seats;
+    for(let i=0;i<seats.length;i++){ const e=seats[i].eye; const dy=(e[1]-1.6)-pt.y; if(dy>1.2||dy<-1.2) continue;
+      const dx=e[0]-pt.x, dz=e[2]-pt.z, d=dx*dx+dz*dz; if(d<bd){ bd=d; best=i; } }
+    return best;
+  }
+}
+
+/* SplatScene — STUB. Gerçek çekim geldiğinde:
+   - venue.scene.kind === 'splat' ve venue.scene.url (.splat/.ply/.spz) okunur,
+   - bir Gaussian splat görüntüleyici (ör. three.js tabanlı bir splat kütüphanesi) aynı THREE.Scene'e
+     eklenir; venue.scene.transform splat'i mekân koordinatına hizalar,
+   - koltuklar görünmez çarpışma geometrisi (InstancedMesh, visible:false) olarak kalır: pick() ve
+     işaretçi aynen çalışır; paintSeats() yalnızca 2D haritayı ve opsiyonel yarı saydam yer imlerini boyar,
+   - viewpoints[].capture (equirect-360) varsa koltuk görünümünde splat yerine/yanında 360° küre kullanılabilir.
+   Kamera, UI ve analitik değişmez: hepsi SceneAdapter arayüzü üzerinden konuşur. */
+class SplatScene extends SceneAdapter {
+  build(venue){ throw new Error('SplatScene henüz uygulanmadı (scene.kind="splat"). Demo ProceduralScene kullanır.'); }
+}
+const SCENE_ADAPTERS = { procedural:ProceduralScene, splat:SplatScene, mesh:null };
+
+/* =====================================================================
+   5) DURUM + ANALİTİK
+   ===================================================================== */
+const S = {
+  venue:null, seats:[], byCode:new Map(), sections:new Map(),
+  sectionId:null, rowId:null, seatIdx:-1, mode:'overview',
+  lang:'tr', themePref:'auto', events:[], viewStart:null, hintShown:false
+};
+const SESSION_ID = 'demo-'+Math.random().toString(36).slice(2,8);
+function track(name, props){
+  const ev={ name, ts:new Date().toISOString(), session_id:SESSION_ID, venue_id:S.venue&&S.venue.venue.id, brand_id:BRAND.id, ...props };
+  S.events.push(ev);
+  try{ window.dispatchEvent(new CustomEvent('koltuk:analytics',{detail:ev})); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage({type:'koltuk:event', event:ev},'*'); }catch(e){}
+  if(drawerOpen) renderAnalytics();
+}
+function endSeatView(){
+  if(S.viewStart){ const ms=Math.round(performance.now()-S.viewStart.t); if(ms>250) track('view_duration',{ ticket_code:S.viewStart.code, section_id:S.viewStart.sec, ms }); S.viewStart=null; }
+}
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) endSeatView(); else if(S.mode==='seat' && S.seatIdx>=0){ const r=S.seats[S.seatIdx]; S.viewStart={code:r.code, sec:r.sectionId, t:performance.now()}; } });
+
+/* =====================================================================
+   6) loadVenue — dış venue.json girişi
+   ===================================================================== */
+function validateVenue(o){
+  if(!o || typeof o!=='object') throw new Error('nesne değil');
+  if(!o.schemaVersion) throw new Error('schemaVersion eksik');
+  if(!o.venue || !Array.isArray(o.venue.focus)) throw new Error('venue.focus eksik');
+  if(!Array.isArray(o.sections) || !o.sections.length) throw new Error('sections boş');
+  for(const s of o.sections){ if(!s.id || !Array.isArray(s.rows)) throw new Error('blok '+(s.id||'?')+' hatalı');
+    for(const r of s.rows) for(const k of r.seats){ if(!Array.isArray(k.eye)||k.eye.length!==3) throw new Error('koltuk '+(k.ticketCode||k.id)+' eye hatalı'); } }
+}
+function loadVenue(obj){
+  try{ validateVenue(obj); }catch(e){ toast(t('errVenue').replace('{m}',e.message)); console.error(e); return false; }
+  endSeatView();
+  S.venue=obj; S.seats=[]; S.byCode.clear(); S.sections.clear();
+  const vf=obj.venue.focus;
+  obj.sections.forEach(sec=>{
+    const info={ sec, seatIdx:[], rows:new Map(), total:0, avail:0 };
+    sec.rows.forEach((row,ri)=>{
+      const idxs=[];
+      row.seats.forEach((seat,si)=>{
+        const code=seat.ticketCode || (sec.id+'-'+row.id+'-'+seat.id);
+        const look=seat.lookAt || sec.focus || vf;
+        const sold=TicketAPI.isSold(code, sec.priceCategory);
+        const rec={ i:S.seats.length, code, sectionId:sec.id, rowId:row.id, seatId:seat.id, ri, si, eye:seat.eye, look, cat:sec.priceCategory, sold };
+        S.seats.push(rec); S.byCode.set(code,rec); idxs.push(rec.i); info.seatIdx.push(rec.i);
+        info.total++; if(!sold) info.avail++;
+      });
+      info.rows.set(row.id,idxs);
+    });
+    S.sections.set(sec.id,info);
+  });
+  S.sectionId=null; S.rowId=null; S.seatIdx=-1; S.mode='overview';
+  if(GL.ok) GL.rebuild();
+  renderMap(); renderLegend();
+  document.getElementById('capacityLbl').textContent=t('capacity').replace('{n}',fmtInt(S.seats.length));
+  const first=[...S.sections.values()].find(x=>x.sec.priceCategory==='CAT1') || [...S.sections.values()][0];
+  selectSection(first.sec.id,{source:'init', silent:true});
+  goOverview(true);
+  return true;
+}
+
+/* =====================================================================
+   7) 3D ÇEKİRDEK: renderer, kamera rig'i, geçişler, giriş
+   ===================================================================== */
+const V3=(a)=>new THREE.Vector3(a[0],a[1],a[2]);
+const reduceMotion=()=>window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const GL = {
+  ok:false, dirty:true, tween:null,
+  orbit:{ theta:0.18, phi:0.86, radius:72, target:new THREE.Vector3(0,3,0) },
+  seat:{ eye:null, yaw0:0, pitch0:0, yaw:0, pitch:0 },
+  init(){
+    const canvas=document.getElementById('gl');
+    try{
+      this.renderer=new THREE.WebGLRenderer({canvas, antialias:(window.devicePixelRatio||1)<2, powerPreference:'high-performance'});
+    }catch(e){ this.fail(); return; }
+    if(!this.renderer.getContext()){ this.fail(); return; }
+    this.ok=true;
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 1.75));
+    this.scene=new THREE.Scene();
+    this.scene.fog=new THREE.Fog(0x000000,90,190);
+    this.camera=new THREE.PerspectiveCamera(50,1,0.1,500);
+    this.scene.add(new THREE.HemisphereLight(0xffffff,0x4a4f53,0.82));
+    const dl=new THREE.DirectionalLight(0xffffff,0.42); dl.position.set(12,40,18); this.scene.add(dl);
+    this.raycaster=new THREE.Raycaster();
+    new ResizeObserver(()=>this.resize()).observe(document.getElementById('stage'));
+    this.resize(); this.bindInput(canvas);
+    const loop=(now)=>{ requestAnimationFrame(loop); this.step(now); if(this.dirty){ this.renderer.render(this.scene,this.camera); this.dirty=false; } };
+    requestAnimationFrame(loop);
+  },
+  fail(){ const d=document.createElement('div'); d.className='nogl'; d.textContent=t('noGL'); document.getElementById('stage').appendChild(d); },
+  rebuild(){
+    if(this.adapter){ this.scene.remove(this.adapter.root); this.adapter.dispose(); }
+    const kind=(S.venue.venue.scene&&S.venue.venue.scene.kind)||'procedural';
+    const Cls=SCENE_ADAPTERS[kind] || ProceduralScene;
+    try{ this.adapter=new Cls(this.scene); this.adapter.build(S.venue,{seats:S.seats}); }
+    catch(e){ console.warn(e.message+' → ProceduralScene'); this.adapter=new ProceduralScene(this.scene); this.adapter.build(S.venue,{seats:S.seats}); }
+    this.applyTheme(); this.applyBrand(); this.paint();
+  },
+  applyTheme(){
+    if(!this.ok) return;
+    const cs=getComputedStyle(document.documentElement), g=k=>cs.getPropertyValue(k).trim();
+    const bg=g('--scene-bg');
+    this.scene.background=new THREE.Color(bg); this.scene.fog.color.set(bg);
+    this.catColors={}; Object.keys(CATS).forEach(k=>this.catColors[k]=new THREE.Color(g(CATS[k].token)));
+    this.soldColor=new THREE.Color(g('--sold')); this.dimColor=new THREE.Color(g('--scene-dim'));
+    this.adapter && this.adapter.setTheme({ concrete:g('--scene-concrete'), concrete2:g('--scene-concrete-2'), wall:g('--scene-wall'), roof:g('--scene-roof'), floor:g('--scene-floor'), truss:g('--scene-truss') });
+    this.paint();
+  },
+  applyBrand(){ if(!this.ok||!this.adapter) return; this.adapter.setBrand(BRAND,S.lang); this.accent=new THREE.Color(BRAND.accent); this.paint(); },
+  paint(){
+    if(!this.ok||!this.adapter||!this.catColors) return;
+    const tmp=new THREE.Color(), sel=S.sectionId;
+    this.adapter.paintSeats(i=>{
+      const r=S.seats[i];
+      if(i===S.seatIdx) return tmp.copy(this.accent||this.dimColor);
+      tmp.copy(r.sold?this.soldColor:this.catColors[r.cat]||this.dimColor);
+      if(sel && r.sectionId!==sel) tmp.lerp(this.dimColor, r.sold?0.4:0.62);
+      else if(r.sold && sel) tmp.lerp(this.catColors[r.cat],0.18);
+      return tmp;
+    });
+    this.adapter.setSeatMarker(S.seatIdx>=0?S.seats[S.seatIdx]:null, S.mode==='seat');
+    this.dirty=true;
+  },
+  resize(){
+    if(!this.ok) return;
+    const el=document.getElementById('stage'); const w=el.clientWidth, h=el.clientHeight; if(!w||!h) return;
+    this.renderer.setSize(w,h,false); this.camera.aspect=w/h; this.camera.updateProjectionMatrix();
+    if(S.mode==='overview' && !this.tween) this.applyCam();
+    this.dirty=true;
+  },
+  fitRadius(){
+    const a=this.camera.aspect||1.5, v=THREE.MathUtils.degToRad(50)/2, h=Math.atan(Math.tan(v)*a);
+    return THREE.MathUtils.clamp(40/Math.tan(h), 72, 140);
+  },
+  orbitPos(o){ const s=Math.sin(o.phi); return new THREE.Vector3(o.target.x+o.radius*s*Math.sin(o.theta), o.target.y+o.radius*Math.cos(o.phi), o.target.z+o.radius*s*Math.cos(o.theta)); },
+  seatDir(){ const y=this.seat.yaw0+this.seat.yaw, p=this.seat.pitch0+this.seat.pitch; return new THREE.Vector3(Math.sin(y)*Math.cos(p), Math.sin(p), Math.cos(y)*Math.cos(p)); },
+  applyCam(){
+    const c=this.camera;
+    this.syncTruss();
+    if(S.mode==='overview'){ c.position.copy(this.orbitPos(this.orbit)); c.lookAt(this.orbit.target); }
+    else { c.position.copy(this.seat.eye); c.lookAt(this.seat.eye.clone().add(this.seatDir())); }
+    this.dirty=true;
+  },
+  syncTruss(){ const a=this.adapter; if(a&&a.truss&&a.params) a.truss.visible=this.camera.position.y<a.params.roofHeight-1; },
+  currentTarget(){ const d=new THREE.Vector3(); this.camera.getWorldDirection(d); return this.camera.position.clone().add(d.multiplyScalar(S.mode==='overview'?this.orbit.radius:20)); },
+  flyTo(pos,target,fov,dur,done){
+    const from={pos:this.camera.position.clone(), target:this.currentTarget(), fov:this.camera.fov};
+    if(reduceMotion()||dur<=0){ this.tween=null; this.camera.fov=fov; this.camera.updateProjectionMatrix(); done(); this.applyCam(); return; }
+    const dist=from.pos.distanceTo(pos);
+    this.tween={from, to:{pos,target,fov}, t0:performance.now(), dur, done, arc:Math.min(14,dist*0.18)};
+    this.dirty=true;
+  },
+  step(now){
+    const tw=this.tween; if(!tw) return;
+    let k=Math.min(1,(now-tw.t0)/tw.dur); const e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+    const p=tw.from.pos.clone().lerp(tw.to.pos,e); p.y+=Math.sin(Math.PI*e)*tw.arc;
+    const tg=tw.from.target.clone().lerp(tw.to.target,e);
+    this.camera.position.copy(p); this.syncTruss(); this.camera.fov=tw.from.fov+(tw.to.fov-tw.from.fov)*e; this.camera.updateProjectionMatrix(); this.camera.lookAt(tg);
+    this.dirty=true;
+    if(k>=1){ this.tween=null; tw.done(); this.applyCam(); }
+  },
+  toSeat(rec, short){
+    const eye=V3(rec.eye), look=V3(rec.look), d=look.clone().sub(eye);
+    this.seat.eye=eye; this.seat.yaw0=Math.atan2(d.x,d.z); this.seat.pitch0=Math.asin(d.y/d.length()); this.seat.yaw=0; this.seat.pitch=0;
+    const fov=this.camera.aspect<0.9?68:58;
+    this.flyTo(eye, eye.clone().add(d.normalize().multiplyScalar(20)), fov, short?650:1300, ()=>{ S.mode='seat'; this.paint(); });
+  },
+  toOverview(instant){
+    const o=this.orbit; o.radius=this.fitRadius(); o.phi=0.86; o.theta=0.18; o.target.set(0,3,0);
+    const to=this.orbitPos(o);
+    this.flyTo(to, o.target.clone(), 50, instant?0:1100, ()=>{ S.mode='overview'; this.paint(); });
+  },
+  bindInput(cv){
+    const P=new Map(); let drag=null, pinch=0;
+    const rot=(dx,dy)=>{
+      if(this.tween) return;
+      if(S.mode==='overview'){ const o=this.orbit; o.theta-=dx*0.006; o.phi=THREE.MathUtils.clamp(o.phi-dy*0.005,0.25,1.42); }
+      else { const k=THREE.MathUtils.degToRad(this.camera.fov)/cv.clientHeight; const st=this.seat;
+        st.yaw=THREE.MathUtils.clamp(st.yaw+dx*k,-1.35,1.35); st.pitch=THREE.MathUtils.clamp(st.pitch+dy*k,-0.85-st.pitch0*0,0.55); }
+      this.applyCam(); hideHint();
+    };
+    const zoom=f=>{
+      if(this.tween) return;
+      if(S.mode==='overview'){ this.orbit.radius=THREE.MathUtils.clamp(this.orbit.radius*f,24,150); }
+      else { this.camera.fov=THREE.MathUtils.clamp(this.camera.fov*f,24,80); this.camera.updateProjectionMatrix(); }
+      this.applyCam();
+    };
+    cv.addEventListener('pointerdown',e=>{ cv.setPointerCapture&&cv.setPointerCapture(e.pointerId); P.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(P.size===1) drag={x:e.clientX,y:e.clientY,t:performance.now(),moved:0}; else { if(drag) drag.moved=99; const [a,b]=[...P.values()]; pinch=Math.hypot(a.x-b.x,a.y-b.y); } });
+    cv.addEventListener('pointermove',e=>{ const pr=P.get(e.pointerId); if(!pr) return; const dx=e.clientX-pr.x, dy=e.clientY-pr.y; pr.x=e.clientX; pr.y=e.clientY;
+      if(P.size===1){ if(drag) drag.moved+=Math.abs(dx)+Math.abs(dy); rot(dx,dy); }
+      else if(P.size===2){ const [a,b]=[...P.values()]; const d=Math.hypot(a.x-b.x,a.y-b.y); if(pinch>0) zoom(pinch/d); pinch=d; } });
+    const up=e=>{ if(!P.has(e.pointerId)) return; P.delete(e.pointerId);
+      if(P.size===0 && drag && drag.moved<7 && performance.now()-drag.t<600) this.tap(e); if(P.size===0) drag=null; pinch=0; };
+    cv.addEventListener('pointerup',up); cv.addEventListener('pointercancel',up);
+    cv.addEventListener('wheel',e=>{ e.preventDefault(); zoom(Math.exp(e.deltaY*0.0012)); },{passive:false});
+    cv.addEventListener('keydown',e=>{ const m={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-18],ArrowDown:[0,18]}[e.key];
+      if(m){ e.preventDefault(); rot(S.mode==='seat'?-m[0]:m[0], S.mode==='seat'?-m[1]:m[1]); }
+      if(e.key==='+'||e.key==='=') zoom(0.9); if(e.key==='-') zoom(1.1); if(e.key==='Escape' && S.mode==='seat') goOverview(); });
+  },
+  tap(e){
+    if(this.tween||!this.adapter) return;
+    const r=this.renderer.domElement.getBoundingClientRect();
+    const ndc=new THREE.Vector2(((e.clientX-r.left)/r.width)*2-1, -((e.clientY-r.top)/r.height)*2+1);
+    this.raycaster.setFromCamera(ndc,this.camera);
+    const i=this.adapter.pick(this.raycaster); if(i<0) return;
+    const rec=S.seats[i];
+    if(S.mode==='overview'){
+      if(rec.sectionId!==S.sectionId) selectSection(rec.sectionId,{source:'3d'});
+      else selectSeat(rec.code,{source:'3d'});
+    } else selectSeat(rec.code,{source:'3d'});
+  }
+};
+
+/* =====================================================================
+   8) EYLEMLER
+   ===================================================================== */
+function selectSection(id,{source='map', silent=false}={}){
+  const info=S.sections.get(id); if(!info) return;
+  const changed=S.sectionId!==id;
+  S.sectionId=id;
+  if(changed){ S.rowId=info.sec.rows[Math.min(info.sec.rows.length-1,Math.floor(info.sec.rows.length*.35))].id; if(S.seatIdx>=0 && S.seats[S.seatIdx].sectionId!==id) S.seatIdx=-1; }
+  if(!silent && changed) track('section_view',{ section_id:id, price_category:info.sec.priceCategory, source });
+  if(S.mode==='seat' && changed) goOverview();
+  renderMapSel(); renderSectionCard(); renderRowSeat(); renderSeatbar(); GL.paint();
+}
+function recommendedSeat(id){
+  const info=S.sections.get(id), rows=info.sec.rows; const start=Math.floor(rows.length*.35);
+  const order=[...rows.keys()].sort((a,b)=>Math.abs(a-start)-Math.abs(b-start));
+  for(const ri of order){ const idxs=info.rows.get(rows[ri].id); const mid=(idxs.length-1)/2;
+    const c=[...idxs].sort((a,b)=>Math.abs(S.seats[a].si-mid)-Math.abs(S.seats[b].si-mid)).find(i=>!S.seats[i].sold); if(c!==undefined) return S.seats[c].code; }
+  return S.seats[info.seatIdx[0]].code;
+}
+function selectSeat(code,{source='picker'}={}){
+  const rec=S.byCode.get(code); if(!rec) return;
+  const short=S.mode==='seat' && S.seatIdx>=0;
+  if(S.seatIdx===rec.i && S.mode==='seat') return;
+  endSeatView();
+  const secChanged=S.sectionId!==rec.sectionId;
+  S.sectionId=rec.sectionId; S.rowId=rec.rowId; S.seatIdx=rec.i;
+  if(secChanged) track('section_view',{ section_id:rec.sectionId, price_category:rec.cat, source });
+  track('seat_view',{ ticket_code:rec.code, section_id:rec.sectionId, row:rec.rowId, seat:rec.seatId, price_category:rec.cat, available:!rec.sold, source });
+  S.viewStart={code:rec.code, sec:rec.sectionId, t:performance.now()};
+  renderMapSel(); renderSectionCard(); renderRowSeat(); renderSeatbar();
+  if(GL.ok){ GL.paint(); GL.toSeat(rec, short); } else { S.mode='seat'; }
+  setModeUI('seat'); showHint();
+}
+function goOverview(instant){
+  endSeatView();
+  if(GL.ok) GL.toOverview(instant); else S.mode='overview';
+  setModeUI('overview');
+}
+function stepSeat(dir){ const r=S.seats[S.seatIdx]; if(!r) return; const idxs=S.sections.get(r.sectionId).rows.get(r.rowId); const j=idxs.indexOf(r.i)+dir; if(j>=0&&j<idxs.length) selectSeat(S.seats[idxs[j]].code,{source:'nav'}); }
+function stepRow(dir){ const r=S.seats[S.seatIdx]; if(!r) return; const sec=S.sections.get(r.sectionId).sec; const ri=r.ri+dir; if(ri<0||ri>=sec.rows.length) return;
+  const idxs=S.sections.get(r.sectionId).rows.get(sec.rows[ri].id); const target=r.si*(idxs.length/Math.max(1,S.sections.get(r.sectionId).rows.get(r.rowId).length));
+  let best=idxs[0]; idxs.forEach(i=>{ if(Math.abs(S.seats[i].si-target)<Math.abs(S.seats[best].si-target)) best=i; }); selectSeat(S.seats[best].code,{source:'nav'}); }
+function ctaClick(){
+  const r=S.seats[S.seatIdx]; if(!r||r.sold) return;
+  track('cta_click',{ ticket_code:r.code, section_id:r.sectionId, row:r.rowId, seat:r.seatId, price_category:r.cat, price:TicketAPI.priceFor(r.cat), currency:'TRY' });
+  toast(t('toastCta').replace('{seat}',seatName(r))+' <code>cta_click</code>', true);
+}
+
+/* =====================================================================
+   9) UI RENDER
+   ===================================================================== */
+const $=id=>document.getElementById(id);
+const t=k=>(I18N[S.lang]&&I18N[S.lang][k])||I18N.tr[k]||k;
+const fmtInt=n=>n.toLocaleString(S.lang==='en'?'en-US':'tr-TR');
+const fmtTL=n=>'₺'+fmtInt(n);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const catName=c=>(CATS[c]&&CATS[c][S.lang])||c;
+const catVar=c=>'var('+((CATS[c]&&CATS[c].token)||'--cat5')+')';
+const secName=sec=>(t('tier_'+sec.tier)!=='tier_'+sec.tier? t('tier_'+sec.tier)+' '+sec.id : sec.name);
+const seatName=r=>t('seatName').replace('{s}',r.sectionId).replace('{r}',r.rowId).replace('{k}',r.seatId);
+const ICON={ l:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 3L5 8l5 5"/></svg>', r:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3l5 5-5 5"/></svg>',
+  u:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 10l5-5 5 5"/></svg>', d:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6l5 5 5-5"/></svg>' };
+
+function renderMap(){
+  const svg=$('map'); let minX=1e9,maxX=-1e9,minZ=1e9,maxZ=-1e9;
+  S.seats.forEach(r=>{ minX=Math.min(minX,r.eye[0]); maxX=Math.max(maxX,r.eye[0]); minZ=Math.min(minZ,r.eye[2]); maxZ=Math.max(maxZ,r.eye[2]); });
+  const pad=2.5; svg.setAttribute('viewBox',`${(minX-pad).toFixed(1)} ${(minZ-pad).toFixed(1)} ${(maxX-minX+2*pad).toFixed(1)} ${(maxZ-minZ+2*pad).toFixed(1)}`);
+  svg.setAttribute('aria-label',t('mapLabel'));
+  let html='';
+  const p=S.venue.venue.scene&&S.venue.venue.scene.params;
+  if(S.venue.venue.type==='arena'){ const [cl,cw]=(p&&p.court)||[28,15];
+    html+=`<rect x="${-cl/2}" y="${-cw/2}" width="${cl}" height="${cw}" rx="0.6" fill="var(--surface-3)" stroke="var(--line-strong)" stroke-width=".3"/>`+
+      `<line x1="0" y1="${-cw/2}" x2="0" y2="${cw/2}" stroke="var(--line-strong)" stroke-width=".3"/><circle r="1.8" fill="none" stroke="var(--line-strong)" stroke-width=".3"/>`+
+      `<text x="0" y="${cw/2-1.6}" text-anchor="middle" style="fill:var(--muted);font-size:2.2px;letter-spacing:.3px">${t('court')}</text>`; }
+  S.sections.forEach((info,id)=>{
+    const rows=info.sec.rows.filter(r=>r.seats.length); if(!rows.length) return;
+    const fr=rows[0].seats, lr=rows[rows.length-1].seats;
+    const pts=[...fr.map(s=>s.eye), ...lr.slice().reverse().map(s=>s.eye)];
+    const d='M'+pts.map(e=>e[0].toFixed(2)+' '+e[2].toFixed(2)).join('L')+'Z';
+    let cx=0,cz=0; pts.forEach(e=>{cx+=e[0];cz+=e[2];}); cx/=pts.length; cz/=pts.length;
+    html+=`<g class="sec" data-id="${esc(id)}" tabindex="0" role="button" aria-label="${esc(secName(info.sec))}, ${esc(catName(info.sec.priceCategory))}">`+
+      `<path d="${d}" fill="${catVar(info.sec.priceCategory)}" stroke="${catVar(info.sec.priceCategory)}" stroke-width="1.6"/>`+
+      `<path class="hl" d="${d}" fill="none" stroke="transparent" stroke-width="0"/>`+
+      `<text x="${cx.toFixed(2)}" y="${(cz+1.1).toFixed(2)}" text-anchor="middle">${esc(id)}</text></g>`;
+  });
+  html+='<circle id="mapSeat" r="1.3" fill="var(--accent)" stroke="var(--text)" stroke-width=".5" style="display:none;pointer-events:none"/>';
+  svg.innerHTML=html;
+  svg.querySelectorAll('.sec').forEach(g=>{
+    g.addEventListener('click',()=>selectSection(g.dataset.id,{source:'map'}));
+    g.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectSection(g.dataset.id,{source:'map'}); } });
+  });
+  renderMapSel();
+}
+function renderMapSel(){
+  $('map').querySelectorAll('.sec').forEach(g=>{
+    const on=g.dataset.id===S.sectionId; const paths=g.querySelectorAll('path');
+    paths[0].style.opacity=S.sectionId&&!on?'.38':'1';
+    paths[1].setAttribute('stroke',on?'var(--text)':'transparent'); paths[1].setAttribute('stroke-width',on?'2.2':'0');
+    g.setAttribute('aria-pressed',on?'true':'false');
+    if(on) g.parentNode.appendChild(g);
+  });
+  const dot=$('mapSeat'); if(!dot) return; dot.parentNode.appendChild(dot);
+  if(S.seatIdx>=0){ const r=S.seats[S.seatIdx]; dot.setAttribute('cx',r.eye[0]); dot.setAttribute('cy',r.eye[2]); dot.style.display=''; } else dot.style.display='none';
+}
+function renderLegend(){
+  const used=new Set([...S.sections.values()].map(i=>i.sec.priceCategory));
+  $('legend').innerHTML=Object.keys(CATS).filter(k=>used.has(k)).map(k=>`<div><i class="sw" style="background:${catVar(k)}"></i><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(catName(k).split(' · ')[1]||catName(k))}</span><b>${fmtTL(TicketAPI.priceFor(k))}</b></div>`).join('');
+}
+function renderSectionCard(){
+  const info=S.sections.get(S.sectionId); if(!info){ $('secCard').innerHTML=''; return; }
+  const s=info.sec, pct=Math.round(100*info.avail/Math.max(1,info.total));
+  $('secCard').innerHTML=`
+    <div class="sec-top"><div class="sec-id">${esc(s.id)}</div>
+      <div style="min-width:0"><h2>${esc(secName(s))}</h2><span class="badge"><i class="sw" style="background:${catVar(s.priceCategory)}"></i>${esc(catName(s.priceCategory))}</span></div></div>
+    <dl class="kv">
+      <dt>${t('samplePrice')}</dt><dd>${fmtTL(TicketAPI.priceFor(s.priceCategory))}</dd>
+      <dt>${t('availability')}</dt><dd>${t('seatsAvail').replace('{a}',fmtInt(info.avail)).replace('{t}',fmtInt(info.total))}</dd>
+      <dd style="grid-column:1/-1;text-align:left"><div class="bar"><span style="width:${pct}%"></span></div></dd>
+      <dt>${t('row')}</dt><dd>${t('rowsCount').replace('{n}',s.rows.length)}</dd>
+    </dl>
+    <div class="row-btns"><button class="btn primary" id="btnOpen">${t('openView')}</button></div>`;
+  $('btnOpen').onclick=()=>selectSeat(recommendedSeat(s.id),{source:'section_card'});
+}
+function renderRowSeat(){
+  const info=S.sections.get(S.sectionId); const sel=$('rowSel'), strip=$('strip');
+  if(!info){ sel.innerHTML=''; strip.innerHTML=''; return; }
+  sel.innerHTML=info.sec.rows.map(r=>`<option value="${esc(r.id)}"${r.id===S.rowId?' selected':''}>${t('row')} ${esc(r.id)} · ${r.seats.length}</option>`).join('');
+  const idxs=info.rows.get(S.rowId)||[]; const c=catVar(info.sec.priceCategory);
+  strip.innerHTML=idxs.map(i=>{ const r=S.seats[i]; const on=i===S.seatIdx;
+    return `<button class="${r.sold?'sold':'av'}" style="--c:${c}" data-code="${esc(r.code)}" aria-pressed="${on}" aria-label="${t('seat')} ${esc(r.seatId)}, ${r.sold?t('sold'):t('available')}">${esc(r.seatId)}</button>`; }).join('');
+  const cur=strip.querySelector('[aria-pressed="true"]');
+  if(cur) strip.scrollLeft=cur.offsetLeft-strip.clientWidth/2+15;
+}
+function renderSeatbar(){
+  const el=$('seatbar'); const r=S.seats[S.seatIdx];
+  if(!r){ const info=S.sections.get(S.sectionId);
+    el.classList.add('compact');
+    if(!info){ el.innerHTML=`<div class="sb-meta">${t('pickSeatPrompt')}</div>`; return; }
+    el.innerHTML=`<div style="min-width:0"><div class="sb-title">${esc(secName(info.sec))}</div><div class="sb-meta"><span>${esc(catName(info.sec.priceCategory))}</span><span><b>${fmtTL(TicketAPI.priceFor(info.sec.priceCategory))}</b></span></div></div>
+      <div class="sb-cta"><button class="btn primary" id="sbOpen">${t('openView')}</button></div>`;
+    $('sbOpen').onclick=()=>selectSeat(recommendedSeat(info.sec.id),{source:'seatbar'}); return; }
+  el.classList.remove('compact');
+  const e=V3(r.eye), L=V3(r.look); const dist=e.distanceTo(L); const elev=Math.round(THREE.MathUtils.radToDeg(Math.atan2(e.y-L.y, Math.hypot(e.x-L.x,e.z-L.z))));
+  const idxs=S.sections.get(r.sectionId).rows.get(r.rowId); const pos=idxs.indexOf(r.i); const nRows=S.sections.get(r.sectionId).sec.rows.length;
+  el.innerHTML=`<div style="min-width:0"><div class="sb-title">${esc(seatName(r))}</div>
+      <div class="sb-meta"><span><i class="sw" style="display:inline-block;vertical-align:-1px;background:${catVar(r.cat)}"></i> ${esc(catName(r.cat).split(' · ')[0])}</span><span><b>${fmtTL(TicketAPI.priceFor(r.cat))}</b></span><span>${t('distance')} <b>${Math.round(dist)} m</b></span><span>${t('elevation')} <b>${elev}°</b></span></div></div>
+    <div class="sb-nav">
+      <button class="icon-btn" data-nav="row-1" aria-label="${t('rowFront')}" ${r.ri===0?'disabled':''}>${ICON.d}</button>
+      <button class="icon-btn" data-nav="row1" aria-label="${t('rowBack')}" ${r.ri>=nRows-1?'disabled':''}>${ICON.u}</button>
+      <button class="icon-btn" data-nav="seat-1" aria-label="${t('prevSeat')}" ${pos<=0?'disabled':''}>${ICON.l}</button>
+      <button class="icon-btn" data-nav="seat1" aria-label="${t('nextSeat')}" ${pos>=idxs.length-1?'disabled':''}>${ICON.r}</button></div>
+    <div class="sb-cta"><button class="btn primary" id="btnCta" ${r.sold?'disabled':''}>${r.sold?t('soldCta'):t('cta')}</button></div>`;
+  el.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{ const v=b.dataset.nav; if(v.startsWith('row')) stepRow(+v.slice(3)); else stepSeat(+v.slice(4)); });
+  $('btnCta').onclick=ctaClick;
+}
+function setModeUI(mode){
+  $('btnOverview').hidden=mode==='overview';
+  if(mode==='overview'){ $('modeTitle').textContent=t('overview'); $('modeSub').textContent=t('modeOverviewSub'); }
+  else { const r=S.seats[S.seatIdx]; $('modeTitle').textContent=t('modeSeat'); $('modeSub').textContent=r?seatName(r):''; }
+}
+let hintTimer=0;
+function showHint(){ if(S.hintShown) return; const h=$('hint'); h.textContent=t('dragHint'); h.hidden=false; clearTimeout(hintTimer); hintTimer=setTimeout(hideHint,5000); }
+function hideHint(){ const h=$('hint'); if(!h.hidden){ h.hidden=true; S.hintShown=true; } }
+let toastTimer=0;
+function toast(msg,html){ const el=$('toast'); if(html) el.innerHTML=msg; else el.textContent=msg; el.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('on'),3200); }
+
+/* Analitik çekmecesi */
+let drawerOpen=false;
+function renderAnalytics(){
+  const ev=S.events, cnt=n=>ev.filter(e=>e.name===n).length;
+  const durs=ev.filter(e=>e.name==='view_duration').map(e=>e.ms); const avg=durs.length?durs.reduce((a,b)=>a+b,0)/durs.length/1000:0;
+  const sv=cnt('seat_view'), cta=cnt('cta_click');
+  const bySec={}; ev.forEach(e=>{ if(e.name==='section_view'||e.name==='seat_view') bySec[e.section_id]=(bySec[e.section_id]||0)+1; });
+  const tops=Object.entries(bySec).sort((a,b)=>b[1]-a[1]).slice(0,5); const mx=tops.length?tops[0][1]:1;
+  const fmtProps=e=>Object.entries(e).filter(([k])=>!['name','ts','session_id','venue_id'].includes(k)).map(([k,v])=>k+'='+v).join(' ');
+  $('drBody').innerHTML=`
+    <p>${t('aIntro')}</p>
+    <div class="kpis">
+      <div class="kpi"><small>${t('kSection')}</small><b>${cnt('section_view')}</b></div>
+      <div class="kpi"><small>${t('kSeat')}</small><b>${sv}</b></div>
+      <div class="kpi"><small>${t('kAvg')}</small><b>${avg?avg.toFixed(1)+' sn':'–'}</b></div>
+      <div class="kpi"><small>${t('kConv')}</small><b>${sv?Math.round(100*cta/sv)+'%':'–'}</b></div>
+    </div>
+    <div><div class="h3">${t('topSections')}</div><div class="tops">${tops.length?tops.map(([id,n])=>`<div><span style="font-family:var(--font-mono)">${esc(id)}</span><i style="width:${Math.max(6,100*n/mx)}%"></i><b>${n}</b></div>`).join(''):`<div class="empty" style="display:block">${t('noEvents')}</div>`}</div></div>
+    <div><div class="card-head" style="margin-bottom:6px"><div class="h3" style="margin:0">${t('eventLog')}</div>
+      <div style="display:flex;gap:6px"><button class="btn" id="aCopy" style="height:30px">${t('copyJson')}</button><button class="btn" id="aClear" style="height:30px">${t('clear')}</button></div></div>
+      <div class="log">${ev.length?ev.slice(-60).reverse().map(e=>`<div><span>${e.ts.slice(11,19)}</span><div><em>${e.name}</em> <span>${esc(fmtProps(e))}</span></div></div>`).join(''):`<div class="empty" style="display:block">${t('noEvents')}</div>`}</div></div>
+    <div><div class="h3">${t('events')}</div><div class="defs">
+      ${['section_view','seat_view','view_duration','cta_click'].map(n=>`<div><code>${n}</code><span>${t('d_'+n)}</span></div>`).join('')}</div></div>`;
+  $('aCopy').onclick=()=>{ const s=JSON.stringify(S.events,null,2); try{ navigator.clipboard.writeText(s).then(()=>toast(t('toastCopied')),()=>{ console.log(s); toast(t('toastCopyFail')); }); }catch(e){ console.log(s); toast(t('toastCopyFail')); } };
+  $('aClear').onclick=()=>{ S.events=[]; renderAnalytics(); };
+}
+function openDrawer(on){
+  drawerOpen=on; $('drawer').classList.toggle('on',on); $('scrim').classList.toggle('on',on||popOpen); $('btnAnalytics').setAttribute('aria-expanded',on);
+  if(on){ renderAnalytics(); $('drClose').focus(); }
+}
+
+/* Ayarlar: marka / dil / tema */
+let popOpen=false;
+function renderPop(){
+  $('pop').innerHTML=`
+    <div><label>${t('brand')}</label><div class="brand-list">${BRAND_PRESETS.map(b=>`<button class="brand-opt" data-brand="${b.id}" aria-pressed="${b.id===BRAND.id}"><span class="bl" style="background:${b.primary};--a:${b.accent}"></span><span>${esc(b.name)}</span></button>`).join('')}</div>
+      <p class="sub" style="margin-top:6px">${t('brandNote')}</p></div>
+    <div><label>${t('language')}</label><div class="seg"><button data-lang="tr" aria-pressed="${S.lang==='tr'}">Türkçe</button><button data-lang="en" aria-pressed="${S.lang==='en'}">English</button></div></div>
+    <div><label>${t('theme')}</label><div class="seg">${['auto','light','dark'].map(k=>`<button data-theme-opt="${k}" aria-pressed="${S.themePref===k}">${t('theme'+k[0].toUpperCase()+k.slice(1))}</button>`).join('')}</div></div>`;
+  $('pop').querySelectorAll('[data-brand]').forEach(b=>b.onclick=()=>setBrand(b.dataset.brand));
+  $('pop').querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+  $('pop').querySelectorAll('[data-theme-opt]').forEach(b=>b.onclick=()=>setTheme(b.dataset.themeOpt));
+}
+function renderBrandSeg(){
+  $('brandSegWide').innerHTML=BRAND_PRESETS.map(b=>`<button data-brand="${b.id}" aria-pressed="${b.id===BRAND.id}">${esc(b.name)}</button>`).join('');
+  $('brandSegWide').querySelectorAll('[data-brand]').forEach(b=>b.onclick=()=>setBrand(b.dataset.brand));
+}
+function openPop(on){ popOpen=on; $('pop').classList.toggle('on',on); $('btnSettings').setAttribute('aria-expanded',on); $('scrim').classList.toggle('on',on||drawerOpen); if(on) renderPop(); }
+function save(){ try{ localStorage.setItem('koltuk-demo',JSON.stringify({brand:BRAND.id,lang:S.lang,theme:S.themePref})); }catch(e){} }
+
+function setBrand(idOrObj){
+  const b=typeof idOrObj==='string'? BRAND_PRESETS.find(x=>x.id===idOrObj) : idOrObj; if(!b) return;
+  BRAND=Object.assign({}, BRAND_PRESETS[0], b);
+  const r=document.documentElement.style;
+  r.setProperty('--brand',BRAND.primary); r.setProperty('--brand-ink',BRAND.primaryInk); r.setProperty('--accent',BRAND.accent); r.setProperty('--accent-ink',BRAND.accentInk);
+  $('logoText').textContent=BRAND.logoText; $('powered').style.display=BRAND.showPoweredBy?'':'none';
+  renderBrandSeg(); if(popOpen) renderPop(); GL.applyBrand(); save();
+}
+function setLang(l){
+  S.lang=l; document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
+  $('drClose').setAttribute('aria-label',t('close'));
+  if(S.venue){ renderMap(); renderLegend(); renderSectionCard(); renderRowSeat(); renderSeatbar(); setModeUI(S.mode==='seat'||GL.tween&&S.seatIdx>=0?'seat':'overview');
+    $('capacityLbl').textContent=t('capacity').replace('{n}',fmtInt(S.seats.length)); }
+  if(popOpen) renderPop(); if(drawerOpen) renderAnalytics(); GL.applyBrand(); save();
+}
+function setTheme(pref){
+  S.themePref=pref; const el=document.documentElement;
+  if(pref==='auto') el.removeAttribute('data-theme'); else el.setAttribute('data-theme',pref);
+  if(popOpen) renderPop(); GL.applyTheme(); save();
+}
+
+/* =====================================================================
+   10) BAŞLAT + GÖMME API'si
+   ===================================================================== */
+function boot(){
+  let pref={}; try{ pref=JSON.parse(localStorage.getItem('koltuk-demo')||'{}')||{}; }catch(e){}
+  S.lang=pref.lang==='en'?'en':'tr'; S.themePref=['light','dark'].includes(pref.theme)?pref.theme:'auto';
+  if(S.themePref!=='auto') document.documentElement.setAttribute('data-theme',S.themePref);
+  if(typeof THREE==='undefined'){ GL.ok=false; GL.fail(); } else GL.init();
+  setBrand(pref.brand||BRAND.id);
+  setLang(S.lang);
+  loadVenue(generateDemoVenue());
+  $('btnOverview').onclick=()=>goOverview();
+  $('btnAnalytics').onclick=()=>{ openPop(false); openDrawer(!drawerOpen); };
+  $('btnSettings').onclick=e=>{ e.stopPropagation(); openDrawer(false); openPop(!popOpen); };
+  $('drClose').onclick=()=>openDrawer(false);
+  $('scrim').onclick=()=>{ openDrawer(false); openPop(false); };
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(drawerOpen) openDrawer(false); if(popOpen) openPop(false); } });
+  $('rowSel').onchange=e=>{ S.rowId=e.target.value; renderRowSeat(); };
+  $('strip').onclick=e=>{ const b=e.target.closest('button[data-code]'); if(b) selectSeat(b.dataset.code,{source:'picker'}); };
+  if(window.matchMedia){ const mq=window.matchMedia('(prefers-color-scheme: dark)'); const f=()=>GL.applyTheme(); mq.addEventListener?mq.addEventListener('change',f):mq.addListener(f); }
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>GL.applyBrand());
+  // Üst pencere (iframe gömme) → görüntüleyici komutları
+  window.addEventListener('message',e=>{ const m=e.data||{}; if(typeof m!=='object') return;
+    if(m.type==='koltuk:selectSeat') selectSeat(m.ticketCode,{source:'host'});
+    if(m.type==='koltuk:selectSection') selectSection(m.sectionId,{source:'host'});
+    if(m.type==='koltuk:overview') goOverview();
+    if(m.type==='koltuk:setBrand') setBrand(m.brand);
+    if(m.type==='koltuk:loadVenue') loadVenue(m.venue); });
+}
+window.loadVenue=loadVenue;
+window.KoltukViewer={ loadVenue, selectSection:(id)=>selectSection(id,{source:'api'}), selectSeat:(c)=>selectSeat(c,{source:'api'}), overview:()=>goOverview(),
+  setBrand, setLang, setTheme, getEvents:()=>S.events.slice(), generateDemoVenue, get BRAND(){return BRAND;},
+  getState:()=>({ mode:S.mode, sectionId:S.sectionId, seat:S.seatIdx>=0?S.seats[S.seatIdx].code:null, tweening:!!(GL.tween),
+    camera:GL.ok?{ position:GL.camera.position.toArray().map(v=>+v.toFixed(2)), fov:+GL.camera.fov.toFixed(1) }:null }) };
+boot();
+})();
+</script>

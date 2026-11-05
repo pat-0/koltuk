@@ -1,0 +1,16 @@
+[GEÇTİ] --help tüm betiklerde çalışıyor: 9/9
+[GEÇTİ] extract_frames: 10 sn testsrc @30fps, --fps 2 → 20 kare: 20 kare 1920x960; start/duration/width alt testi 5 kare 960px; üzerine yazma koruması OK
+[GEÇTİ] equirect_to_persp: görünüm merkezleri doğru boylam/enleme bakıyor: 25 görüntü; merkez sapması maks lon 0.62°, lat 0.00°; FOV kenarları -44.5°/44.5°; zenit 90.0°; cameras.txt f=256 px
+[GEÇTİ] filter_blurry: bulanık kareler eleniyor, pencere modu en keskini tutuyor: yüzdelik: 8/12 tutuldu, 4 bulanığın hepsi elendi; pencere(3): [0, 3, 6, 10]; keskin skor ~37717, sigma-31 skoru 13.2
+[GEÇTİ] seats_from_plan: örnek arena şemaya uygun, geometri ve numaralandırma doğru: 24 blok, 11868 koltuk, ticketCode benzersiz; 103/102 geometri ve 'koltuk 1 solda' kontrolleri OK; çekim planı 120 nokta
+[GEÇTİ] seats_from_plan: bilet eşleme, --strict, viewpoints, alpha sıra, hatalı girdi: alpha sıralar A-C, artan koltuk 4/6/8, eşleme+desen, rtl, viewpoint göz=koltuk, --strict hata, geçersiz tier hata, çakışma uyarısı OK
+[GEÇTİ] align_points: bilinen dönüşüm (ölçek 0.37, 33°, öteleme, 1 cm gürültü) geri bulunuyor: level: ölçek 0.3700, rotY 33.00°, RMS 0.9 cm; full: 2° eğim 1.99° olarak bulundu ve uyarı verildi
+[GEÇTİ] venue.schema.json: geçerli draft 2020-12 şeması; v0.1 dosyası da geçiyor: check_schema OK; v0.1 örnek dosyası geçerli; web demo biçimi (params, capture:null) geçerli + sürüm uyarısı
+[GEÇTİ] validate_venue: bozuk dosyalarda hataları yakalıyor: 9 bozuk durumun hepsi HATA verdi; yakınlık uyarısı + --warnings-as-errors çıkış 2
+[GEÇTİ] seats_from_plan v0.2: obstructed, origin, LOD dosyaları, kuaterniyon, params, viewpoint row/seat/lensHeight: tiyatro splat+LOD(3 dosya)+kuaterniyon geçerli; 133 kısıtlı koltuk; viewpoint row/seat/lensHeight/capture:null; params yalnız procedural
+[GEÇTİ] şablonlar ve örnek arena: v0.2, doğrulanıyor, kapasite aralıkları tutuyor: ornek-arena=11868, sablon-tiyatro=770, sablon-spor-salonu=2112, sablon-tiyatro 18 nokta, sablon-spor-salonu 30 nokta
+[GEÇTİ] pipeline: sentetik çekim klasöründen images/ + rapor + dry-run komutları: 25 kare → 11 seçildi (6 bulanık karenin hiçbiri seçilmedi); 224 perspektif → 208 images/; kural dışı dosya atlandı; süre 1.02 sn
+[GEÇTİ] ply_to_splat: sentetik 3DGS .ply → .splat; web formatıyla aynı yapı; renk/opaklık/kovaryans doğru: 500 gauss, kovaryans medyan göreli hata 0.61%; web ornek.splat (100860 gauss) aynı 32 bayt yapı, kuaterniyon normları [0.992, 1.005]
+[GEÇTİ] ply_to_splat: hizalama (align_points JSON), --flip-yz, kırpma, budama, hatalı girdiler: hizalama konum ±1 mm, kovaryans medyan hata 0.52%; flip/kırpma/budama OK; sıkıştırılmış PLY ve eksik alan reddedildi
+[GEÇTİ] splat_to_b64: web demosunun .b64.txt biçimiyle birebir (tek satır), gidiş-dönüş: tek satır, gidiş-dönüş birebir; web/data/ornek.splat → üretilen .b64.txt, web'deki dosyayla BAYT BAYT aynı
+[GEÇTİ] cloud/runpod_train.sh: bash -n, shellcheck (varsa), DRY_RUN akışı: bash -n OK; shellcheck (warning+) temiz; DRY_RUN tüm adımları sırayla yazdırdı; geçersiz POSE_MODE reddedildi

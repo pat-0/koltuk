@@ -1,0 +1,6 @@
+section,row,seat,severity,reason
+101,2,12-17,partial,Pota arkası: pota kısmen görüşü kesiyor
+101,1,12-17,severe,Pota arkası: pota ve destek konstrüksiyonu sahanın bu yarısını kapatıyor
+106,1,12-17,severe,Pota arkası: pota ve destek konstrüksiyonu sahanın bu yarısını kapatıyor
+201,14,*,partial,Çatı makası skorbordun üst kısmını kesiyor
+208,14,*,partial,Çatı makası skorbordun üst kısmını kesiyor

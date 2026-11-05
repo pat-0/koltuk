@@ -1,0 +1,11 @@
+section,name,tier,priceCategory,shape,cx,cz,facingDeg,startRadius,angleStart,angleEnd,rows,seatsPerRow,seatsPerRowIncrement,length,seatWidth,rowDepth,riserHeight,frontHeight,eyeHeight,rowLabels,rowStart,seatOrder,focusX,focusY,focusZ
+K1,Kuzey Tribün K1,lower,CAT2,line,-9.5,10.5,270,,,,14,18,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+K2,Kuzey Tribün K2,vip,VIP,line,0,10.5,270,,,,14,18,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+K3,Kuzey Tribün K3,lower,CAT2,line,9.5,10.5,270,,,,14,18,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+G1,Güney Tribün G1,lower,CAT2,line,-9.5,-10.5,90,,,,14,18,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+G2,Güney Tribün G2,lower,CAT1,line,0,-10.5,90,,,,14,18,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+G3,Güney Tribün G3,lower,CAT2,line,9.5,-10.5,90,,,,14,18,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+D1,Doğu Kale Arkası D1,lower,CAT3,line,18.5,-4.0,180,,,,10,15,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+D2,Doğu Kale Arkası D2,lower,CAT3,line,18.5,4.0,180,,,,10,15,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+B1,Batı Kale Arkası B1,lower,CAT3,line,-18.5,-4.0,0,,,,10,15,,,0.48,0.8,0.4,0.6,1.15,,,,,,
+B2,Batı Kale Arkası B2,lower,CAT3,line,-18.5,4.0,0,,,,10,15,,,0.48,0.8,0.4,0.6,1.15,,,,,,
