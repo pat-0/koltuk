@@ -33,10 +33,10 @@ Müdürlüğünüze bağlı **Erzincan 13 Şubat Şehir Stadyumu**, futbol için
 1. Çekim seyircisiz yapılır. Görüntülerde tanınabilir kişi bulunmaması için yayından önce tüm görüntüler taranır ve gerekirse maskelenir (6698 sayılı KVKK).
 2. Müdürlüğünüzün belirleyeceği güvenlik açısından hassas alanlar ve reklam/sponsor alanları yayından önce maskelenir. Yayın öncesi son onay Müdürlüğünüze sunulur.
 3. Tesis kurallarına ve iş güvenliği önlemlerine uyulur; çim sahaya ekipmanla girilmez. Çekim kaynaklı her türlü zarar şirketimizce karşılanır.
-4. Spor Genel Müdürlüğü İşletme Yönetmeliği uyarınca belirlenecek **tahsis ücreti ve teminatı ödemeyi kabul ediyoruz.**
+4. Çekimin, mümkünse salonu/stadyumu kullanan kulübün mevcut tahsis süresi içinde ve kulübün onayıyla yapılmasını; bunun mümkün olmaması halinde ücretsiz kısa süreli kullanım imkânı olup olmadığının ve olmadığı durumda uygulanacak ücretin tarafımıza bildirilmesini rica ediyoruz.
 5. Elde edilecek koltuk görünümünü, Müdürlüğünüzün ve 24 Erzincanspor'un tanıtım ve bilet satışında **ücretsiz** kullanımına sunmaya hazırız.
 
-Gereğini ve tarafımıza uygulanacak ücret ile uygun tarihlerin bildirilmesini arz ederiz.
+Gereğini ve uygun tarihlerin bildirilmesini arz ederiz.
 
 [GG.AA.2026]
 
@@ -63,7 +63,8 @@ Hyperbaric olarak bilet satış ekranlarına eklenen bir **3D koltuk görünüm�
 13 Şubat Şehir Stadyumu, 2022'de açılan, futbola özel ve tribünleri tamamen kapalı modern bir stadyum. Uluslararası stadyum sitesi StadiumDB'nin 2022 "Yılın Stadyumu" ödülüne aday gösterilen 36 stadyum arasına girdi. Türkiye'de bu hizmetin ilk uygulandığı stadyumun Erzincan'da olması kulübünüz ve şehir için güçlü bir tanıtım olur.
 
 **Önerimiz:**
-- Stadyumun çekimini biz yapıyoruz ve masrafları biz karşılıyoruz (il müdürlüğüne ödenecek tesis kullanım bedeli dahil).
+- Stadyumun çekimini ve bütün işleme masraflarını biz karşılıyoruz.
+- Çekimi, kulübünüzün tesisteki mevcut kullanım saatlerinden birinde (ör. antrenmandan önceki 3–4 saat, salon boşken) yapmayı öneriyoruz; böylece ek tesis kullanımı ve ücreti gerekmeyebilir.
 - Ortaya çıkan koltuk görünümünü kulübünüzün sitesinde ve bilet satış kanalınızda **ücretsiz** kullanabilirsiniz.
 - Karşılığında, bu çalışmayı örnek proje olarak tanıtımımızda anabilmeyi rica ediyoruz.
 
@@ -86,5 +87,5 @@ Saygılarımızla,
 | Mekân beyanı | Tesis Gençlik ve Spor Bakanlığı'na ait; işletmeci Erzincan GSİM (Wikipedia; teyit edilecek) |
 | Çekim süresi | 2 gün |
 | Yayın kanalları (4.1) | Hyperbaric demo ☑ · GSİM ve kulüp tanıtımı ☑ · Kulübün bilet satış kanalı ☐ (kulüple mutabakat) |
-| Lisans ücreti (4.4) | Tesis tahsis ücreti il müdürlüğü tarifesine göre: [___ TL] |
+| Lisans ücreti (4.4) | Bedelsiz hedefleniyor (kulübün tahsis süresi içinde veya ücretsiz kısa süreli kullanım); ücret istenirse kurucu onayı gerekir |
 | Sponsor kısıtları (5) | Stadyumdaki reklam panoları ve tribündeki "Erzincan 24" koltuk yazısı: maskeleme gerekip gerekmediği sorulacak |

@@ -1,4 +1,6 @@
-# Bostancı Gösteri Merkezi: kiralama ve çekim talebi
+# Bostancı Gösteri Merkezi: ücretsiz çekim talebi (takas önerisi)
+
+> **Bütçe notu (04.11.2026):** Kurucu kararı: salon kiralamak için bütçe yok. Bu yüzden talep **ücretsiz kullanım karşılığında koltuk görünümünün BGM'ye ücretsiz verilmesi** üzerine kurulu. BGM ücret isterse kiralanmaz; Yalova/Erzincan ve diğer ücretsiz seçeneklere geçilir.
 
 > ## ⚠️ Taslaktır, hukuki tavsiye değildir; göndermeden önce kurucu ve avukat onayı gerekir.
 > Köşeli parantezli alanlar doldurulmadan gönderilmez. Gönderim yalnızca BGM'nin kurumsal kanallarından yapılır: bgmonline.net/mekan-kiralama sayfasındaki "Hizmet İletişim Formu" veya sitede yazan genel iletişim adresi.
@@ -15,7 +17,7 @@
 |---|---|
 | Ad, Soyad | [Ad Soyad] |
 | E-posta | [kurumsal e-posta] |
-| Konu | Mekan Kiralama |
+| Konu | Diğer (Mekân iş birliği önerisi) |
 | Telefon | [kurumsal telefon] |
 | Firma Adı | Hyperbaric |
 | Etkinlik Bilgisi | Seyircisiz, yarım günlük 360° fotoğraf ve video çekimi (salon boş, sahne kurulumu gerekmez) |
@@ -31,9 +33,9 @@
 > - Gereken: Salonun genel aydınlatmasının çekim boyunca açık ve sabit olması. Ses sistemi, sahne kurulumu ve ek personel gerekmiyor.
 > - Ekip: 2–3 kişi. Drone kullanılmayacak.
 >
-> Bu çekim için kiralama bedelini ve şartlarınızı öğrenebilir miyiz?
+> Önerimiz bir **iş birliği**: Salonu bu kısa çekim için ücretsiz kullanmamıza izin verirseniz, ortaya çıkan koltuk görünümünü Bostancı Gösteri Merkezi'nin kendi sitesinde ve etkinliklerinizin bilet satış sayfalarında **ücretsiz** kullanabilirsiniz. Böylece seyircileriniz bilet alırken koltuklarından sahneyi görebilir; bu hizmet şu an Türkiye'deki salonlarda bulunmuyor.
 >
-> Ayrıca bir öneri: Çekimden elde edilecek koltuk görünümünü, Bostancı Gösteri Merkezi'nin kendi sitesinde ve bilet satış sayfalarında **ücretsiz** kullanmanız için size sunabiliriz. Bu durumda kiralama bedelinde bir indirim yapılması mümkün olur mu? Uygun görürseniz kısa bir görüşmede örnek demoyu gösterebiliriz.
+> Salonun boş olduğu bir sabah, etkinlik kurulumundan önceki birkaç saat de bizim için yeterli olur. Uygun görürseniz kısa bir görüşmede örnek demoyu gösterebiliriz.
 >
 > Saygılarımızla,
 > [Ad Soyad] · [Unvan] · Hyperbaric
@@ -55,7 +57,7 @@ Bostancı, Kadıköy / İstanbul
 
 Sayın Yetkili,
 
-[GG.AA.2026] tarihli yazışmamıza istinaden, Bostancı Gösteri Merkezi ana salonunda aşağıdaki koşullarla çekim yapmak üzere izninizi ve kiralama onayınızı rica ederiz.
+[GG.AA.2026] tarihli yazışmamıza istinaden, Bostancı Gösteri Merkezi ana salonunda aşağıdaki koşullarla, karşılıklı iş birliği kapsamında ücretsiz çekim yapmak üzere izninizi rica ederiz. Karşılığında çekimden üretilecek koltuk görünümü, Bostancı Gösteri Merkezi'nin web sitesi ve etkinliklerinin bilet satış sayfalarında ücretsiz kullanımınıza sunulacaktır.
 
 **1. Amaç.** Hyperbaric, bilet satış ekranlarında izleyicinin seçtiği koltuktan sahneyi görmesini sağlayan **[Ürün adı]** hizmetini geliştirmektedir. Çekilen görüntüler 3D modele dönüştürülecek ve aşağıdaki kanallarda **ticari amaçla** kullanılacaktır:
 - Hyperbaric'in satış demoları ve tanıtım sunumları,
@@ -112,5 +114,5 @@ Bilgilerinize arz ederiz.
 | Çekim tarihi ve saati | [Onaylanan gün], 09:00–15:00 |
 | Düzen | Oturmalı-1 |
 | Yayın kanalları (4.1) | Hyperbaric demo ve sunumları ☑ · BGM web sitesi ☐ · BGM etkinliklerini satan bilet şirketleri ☐ (müzakereye bağlı) |
-| Lisans ücreti (4.4) | Kiralama bedeli: [___ TL] / Karşılıklı kullanım: [koltuk görünümü BGM'ye ücretsiz] |
+| Lisans ücreti (4.4) | Bedelsiz; karşılığında koltuk görünümü BGM'ye ücretsiz (takas). Bedelsiz lisansın vergisel boyutu avukata soruldu (avukat dosyası, soru 2). |
 | Bulut işleme izni (7) | [Avukat görüşüne göre işaretlenecek] |

@@ -33,10 +33,10 @@ Bu kapsamda Müdürlüğünüze bağlı **90. Yıl Spor Salonu**'nda, müsabaka 
 1. Çekim seyircisiz yapılır. Görüntülerde tanınabilir kişi bulunmaması için yayından önce tüm görüntüler taranır ve gerekirse maskelenir (6698 sayılı KVKK).
 2. Müdürlüğünüzün belirleyeceği güvenlik açısından hassas alanlar ve reklam/sponsor alanları yayından önce maskelenir. Yayın öncesi son onay Müdürlüğünüze sunulur.
 3. Tesis kurallarına ve iş güvenliği önlemlerine uyulur. Çekim kaynaklı her türlü zarar şirketimizce karşılanır.
-4. Spor Genel Müdürlüğü İşletme Yönetmeliği uyarınca belirlenecek **tahsis ücreti ve teminatı ödemeyi kabul ediyoruz.**
+4. Çekimin, mümkünse salonu/stadyumu kullanan kulübün mevcut tahsis süresi içinde ve kulübün onayıyla yapılmasını; bunun mümkün olmaması halinde ücretsiz kısa süreli kullanım imkânı olup olmadığının ve olmadığı durumda uygulanacak ücretin tarafımıza bildirilmesini rica ediyoruz.
 5. Elde edilecek koltuk görünümünü, Müdürlüğünüzün ve salonu kullanan kulüplerin tanıtım ve bilet satışında **ücretsiz** kullanımına sunmaya hazırız.
 
-Gereğini ve tarafımıza uygulanacak ücret ile uygun tarihlerin bildirilmesini arz ederiz.
+Gereğini ve uygun tarihlerin bildirilmesini arz ederiz.
 
 [GG.AA.2026]
 
@@ -63,7 +63,8 @@ Hyperbaric olarak bilet satış ekranlarına eklenen bir **3D koltuk görünüm�
 90. Yıl Spor Salonu'nun 2.000 kişilik kapasitesiyle Süper Lig'in en küçük salonlarından biri olduğunu ve maçlarınızın sık sık kapalı gişe oynandığını biliyoruz. Bu yüzden salonun her koltuğunun değeri yüksek; taraftarın doğru koltuğu güvenle seçmesi hem satışa hem memnuniyete yarıyor.
 
 **Önerimiz:**
-- Salonun çekimini biz yapıyoruz ve masrafları biz karşılıyoruz (il müdürlüğüne ödenecek tesis kullanım bedeli dahil).
+- Salonun çekimini ve bütün işleme masraflarını biz karşılıyoruz.
+- Çekimi, kulübünüzün tesisteki mevcut kullanım saatlerinden birinde (ör. antrenmandan önceki 3–4 saat, salon boşken) yapmayı öneriyoruz; böylece ek tesis kullanımı ve ücreti gerekmeyebilir.
 - Ortaya çıkan koltuk görünümünü kulübünüzün sitesinde ve bilet satış kanalınızda **ücretsiz** kullanabilirsiniz.
 - Karşılığında, bu çalışmayı örnek proje olarak tanıtımımızda anabilmeyi rica ediyoruz.
 
@@ -85,5 +86,5 @@ Saygılarımızla,
 | Mekân | Yalova 90. Yıl Spor Salonu (~2.000 seyirci) |
 | Mekân beyanı | Tesis Gençlik ve Spor Bakanlığı'na ait; izin veren: Yalova GSİM (teyit edilecek) |
 | Yayın kanalları (4.1) | Hyperbaric demo ☑ · GSİM ve kulüp tanıtımı ☑ · Kulübün bilet satış kanalı ☐ (kulüple mutabakat) |
-| Lisans ücreti (4.4) | Tesis tahsis ücreti il müdürlüğü tarifesine göre: [___ TL] |
+| Lisans ücreti (4.4) | Bedelsiz hedefleniyor (kulübün tahsis süresi içinde veya ücretsiz kısa süreli kullanım); ücret istenirse kurucu onayı gerekir |
 | Kamu tesisine özel | Görüntülerin kamu tesisi tanıtımında kullanılabilmesi; ticari kullanım için ayrıca yazılı onay (avukat görüşü) |

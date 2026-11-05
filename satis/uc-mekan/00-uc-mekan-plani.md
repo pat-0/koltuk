@@ -12,7 +12,7 @@
 | Ev sahibi kulüp | — | Yalovaspor Basketbol (2024–25'te Süper Lig) | 24 Erzincanspor (TFF 2. Lig) |
 | Satış kanalı (görülen) | Biletix, Bubilet, iTicket | Doğrulanmadı | Doğrulanmadı (deplasman maçları Passo'da satılıyor) |
 | Çekim süresi (tahmin) | 1 gün | 1 gün | 2 gün |
-| Erişim yolu | Kiralama talebi (özel) | İl müdürlüğüne dilekçe + kulüp desteği | İl müdürlüğüne dilekçe + kulüp desteği |
+| Erişim yolu | Ücretsiz iş birliği (takas) | Kulübün tahsis süresi + il müdürlüğüne bilgi/dilekçe | Kulübün tahsis süresi + il müdürlüğüne bilgi/dilekçe |
 | İzin süresi (tahmin) | 1–3 hafta | 2–6 hafta | 2–6 hafta |
 
 ¹ GSİM: Gençlik ve Spor İl Müdürlüğü.
@@ -25,7 +25,8 @@ Spor Genel Müdürlüğü İşletme Yönetmeliği'ne göre (RG 09.12.2005, son d
 
 - **Tahsis yetkisi il ve ilçe müdürlüklerinde** (md. 9). Başvuru il/ilçe müdürlüğüne yapılır (md. 10).
 - Ücret, il müdürlüğü komisyonunun **her yıl Aralık'ta** belirlediği tarifeye göre (md. 15). Bedel yatırılıp teminat (%6) verildikten sonra sözleşme yapılır (md. 10, 12).
-- Ücretsiz tahsis halleri sınırlı (md. 18); ticari bir şirketin çekimi bunlara girmiyor gibi görünüyor. **Ücret ödemeyi baştan kabul etmek** süreci hızlandırır.
+- Ücretsiz tahsis halleri sınırlı (md. 18); ticari bir şirketin çekimi bunlara girmiyor gibi görünüyor.
+- **Bütçe kararı (04.11.2026): kiralama/ücret ödenmeyecek.** Bu yüzden ana yol, kulübün tesisteki **mevcut kullanım saatlerinden birini** (ör. antrenman öncesi, salon boşken) kulübün onayıyla kullanmak. İl müdürlüğüne dilekçe bilgi ve onay için verilir; ücret istenirse kurucuya sorulur.
 - Çekime özel bir hüküm yok. Tesis, il müdürlüğünün inisiyatifiyle kısa süreli kullandırılıyor.
 
 **Pratik yol:** Önce ev sahibi kulüple konuş. Kulüp bilet satışından fayda göreceği için il müdürlüğüne yapılacak başvuruyu destekleyebilir. Sonra il müdürlüğüne resmî dilekçe ver.
@@ -53,7 +54,7 @@ Spor Genel Müdürlüğü İşletme Yönetmeliği'ne göre (RG 09.12.2005, son d
 ## Karar bekleyen ve doğrulanmamış konular
 
 - 360° kamera alımı (Insta360 X5, ~$550): çekimden önce gerekli.
-- BGM'nin işletmecisi ve kiralama bedeli.
+- BGM'nin işletmecisi ve takas önerisine yaklaşımı.
 - Yalova ve Erzincan tesis kullanım ücretleri (il müdürlüğü tarifesi).
 - Yalovaspor Basketbol'un 2026–27'de hangi ligde oynadığı ve iki kulübün iç saha bilet satış kanalı.
 - Erzincan kapasitesi: Wikipedia 12.000, StadiumDB 12.981.
